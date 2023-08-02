@@ -33,6 +33,11 @@ jobs:
           ###### End of Repository/Build Configurations ######
         env:
           NEXT_PUBLIC_MY_SECRET: ${{ secrets.MY_SECRET }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          YAHOO_CLIENT_ID: ${{ secrets.YAHOO_CLIENT_ID }}
+          YAHOO_CLIENT_SECRET: ${{ secrets.YAHOO_CLIENT_SECRET }}
+          YAHOO_REDIRECT_URI: ${{ secrets.YAHOO_REDIRECT_URI }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
