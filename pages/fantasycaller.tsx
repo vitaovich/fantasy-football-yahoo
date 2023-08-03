@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const FantasyCaller = () => {
     const { data: session, status } = useSession()
-    const [apiCallHistory, setApiCallHistory] = useState<string[]>([]);
+    const [apiCallHistory, setApiCallHistory] = useState<string[]>(['users;use_login=1/games;game_keys=nfl/teams']);
     const [result, setResult] = useState<string>('No Result');
 
     const {
@@ -50,9 +50,15 @@ const FantasyCaller = () => {
         let description: string;
         return (
             <li key={idx} className="my-2">
-                <button className="bg-gray-300 rounded-md px-4 py-2" onClick={() => handleResult(call)}>
-                    {call}
-                </button>
+                <div className="flex flex-row items-center justify-between border-t border-gray-300 p-2">
+                    <span className="select-all">
+                        {call}
+                    </span>
+                    <button className="ml-4 bg-purple-600 rounded-md px-4 py-2 text-white" onClick={() => handleResult(call)}>
+                        Call
+                    </button>
+                </div>
+
             </li>
         )
     })
@@ -60,8 +66,7 @@ const FantasyCaller = () => {
     return (
         <>
             <div className="flex flex-col items-center justify-center min-h-screen space-y-24 py-4">
-
-                <h1 className="text-4xl text-purple-600">Yahoo Fantasy API Caller</h1>
+                <h1 className="text-4xl text-purple-600">Yahoo! Fantasy API Caller</h1>
                 {session && (
                     <div className="flex flex-col w-3/4 space-y-4">
                         <div className="flex flex-row space-x-4">
@@ -119,7 +124,7 @@ const FantasyCaller = () => {
                     <div className="flex flex-row items-center space-x-4">
                         <span>
                             <small className="m-2">Signed in as</small>
-                            <br/>
+                            <br />
                             <strong className="m-2">{session.user.email ?? session.user.name}</strong>
                         </span>
                         <Link

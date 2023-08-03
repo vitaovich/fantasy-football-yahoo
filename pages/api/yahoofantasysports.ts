@@ -14,7 +14,7 @@ async function makeApiCall(req: NextApiRequest, uri: string) {
         name: 'myCall',
         uri: uri,
         success: false,
-        message: 'no call made',
+        message: '',
         result: {}
     };
     const token = await getToken({req});
@@ -34,6 +34,7 @@ async function makeApiCall(req: NextApiRequest, uri: string) {
                     apiCallResult.message = 'Error parsing XML:', err;
                 } else {
                     // console.log(JSON.stringify(result));
+                    apiCallResult.success = true;
                     apiCallResult.result = result;
                     // const teamInfo = {
                     //     name: result.fantasy_content.users[0].user[0].games[0].game[0].teams[0].team[0].name[0]
