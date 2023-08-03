@@ -59,7 +59,7 @@ const FantasyCaller = () => {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center min-h-screen space-y-24">
+            <div className="flex flex-col items-center justify-center min-h-screen space-y-24 py-4">
 
                 <h1 className="text-4xl text-purple-600">Yahoo Fantasy API Caller</h1>
                 {session && (
@@ -77,13 +77,13 @@ const FantasyCaller = () => {
                                         id={"name"}
                                         placeHolder={"e.g. users;use_login=1/games;game_keys=nfl/teams"}
                                     />
-                                    <button className="bg-blue-300 py-2 px-4 rounded-md">Submit</button>
+                                    <button className="bg-green-400 text-white py-2 px-4 rounded-md">Submit</button>
                                 </form>
                             </div>
                             <div className="flex flex-col w-2/3 border border-2 border-gray-300 p-4 rounded-md">
                                 <h2>Result</h2>
-                                <div className="border border-2 border-blue-400 rounded-md p-2">
-                                    <pre className="max-h-96 text-xs overflow-auto select-all">
+                                <div className="border border-2 border-purple-600 rounded-md p-2">
+                                    <pre className="h-96 text-xs overflow-auto select-all">
                                         {result}
                                     </pre>
                                 </div>
@@ -99,13 +99,13 @@ const FantasyCaller = () => {
 
                 )}
                 {!session && (
-                    <div className="flex flex-row space-x-4">
+                    <div className="flex flex-row items-center space-x-4">
                         <span>
                             You are not signed in
                         </span>
                         <Link
                             href={`/api/auth/signin`}
-                            className='bg-blue-400 rounded-md p-2 text-white'
+                            className='bg-green-400 rounded-md py-2 px-4 text-white'
                             onClick={(e) => {
                                 e.preventDefault()
                                 signIn()
@@ -116,15 +116,15 @@ const FantasyCaller = () => {
                     </div>
                 )}
                 {session?.user && (
-                    <div className="flex flex-row space-x-4">
-                        <span >
-                            <small>Signed in as</small>
-                            <br />
-                            <strong>{session.user.email ?? session.user.name}</strong>
+                    <div className="flex flex-row items-center space-x-4">
+                        <span>
+                            <small className="m-2">Signed in as</small>
+                            <br/>
+                            <strong className="m-2">{session.user.email ?? session.user.name}</strong>
                         </span>
                         <Link
                             href={`/api/auth/signout`}
-                            className='bg-blue-400 rounded-md px-4 text-white'
+                            className='bg-red-400 rounded-md py-2 px-4 text-white'
                             onClick={(e) => {
                                 e.preventDefault()
                                 signOut()
