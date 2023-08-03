@@ -67,12 +67,12 @@ export default function Home() {
                 style={{ backgroundImage: `url('${session.user.image}')` }}
               />
             )} */}
-            <Image
+            {/* <Image
               src={session.user.image}
               alt="profile image"
               width={50}
               height={50}
-            />
+            /> */}
             <span >
               <small>Signed in as</small>
               <br />
