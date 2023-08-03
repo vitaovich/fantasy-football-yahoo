@@ -31,8 +31,9 @@ const FantasyCaller = () => {
             return
         }
         console.log("ENTERED:" + enteredCall);
-        const nextApiCallHistory = [...apiCallHistory, enteredCall]
+        const nextApiCallHistory = [enteredCall, ...apiCallHistory]
         setApiCallHistory(nextApiCallHistory);
+        handleResult(enteredCall);
         resetCallInput();
     }
 
@@ -47,10 +48,8 @@ const FantasyCaller = () => {
 
     const previousCalls = apiCallHistory.map((call, idx) => {
         let description: string;
-        description = (idx + 1) + ". ";
         return (
             <li key={idx} className="my-2">
-                {description}
                 <button className="bg-gray-300 rounded-md px-4 py-2" onClick={() => handleResult(call)}>
                     {call}
                 </button>
@@ -60,41 +59,42 @@ const FantasyCaller = () => {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center min-h-screen space-y-24 bg-gray-300">
+            <div className="flex flex-col items-center justify-center min-h-screen space-y-24">
 
                 <h1 className="text-4xl text-purple-600">Yahoo Fantasy API Caller</h1>
                 {session && (
-                    <div className="flex flex-row">
-                        <div className="bg-white mx-12 p-4 rounded-md">
+                    <div className="space-y-4">
+                        <div className="flex flex-row space-x-4">
+                            <div className="border border-2 border-gray-300 p-4 rounded-md">
+                                <form onSubmit={handleSubmit} className='space-y-4'>
+                                    <Input
+                                        label={"API Call"}
+                                        validationMessage={"This field is required."}
+                                        value={enteredCall}
+                                        hasError={callInputHasError}
+                                        changeHandler={callChangedHandler}
+                                        blurHandler={callBlurHandler}
+                                        id={"name"}
+                                        placeHolder={"e.g. users;use_login=1/games;game_keys=nfl/teams"}
+                                    />
+                                    <button className="bg-blue-300 py-2 px-4 rounded-md">Submit</button>
+                                </form>
+                            </div>
+                            <div className="border border-2 border-gray-300 p-4 rounded-md">
+                                <h2>Result</h2>
+                                <div className="w-96 border border-2 border-blue-400 rounded-md p-2 whitespace-pre overflow-auto">
+                                    {result}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="py-4 px-6 rounded-md  border-2 border-gray-300">
                             <h2>History</h2>
-                            <ol className="border border-blue-500 p-2">
+                            <ol >
                                 {previousCalls}
                             </ol>
                         </div>
-                        <div className="bg-white mx-12 p-4 rounded-md">
-                            <form onSubmit={handleSubmit} className='space-y-4'>
-                                <Input
-                                    label={"API Call"}
-                                    validationMessage={"This field is required."}
-                                    value={enteredCall}
-                                    hasError={callInputHasError}
-                                    changeHandler={callChangedHandler}
-                                    blurHandler={callBlurHandler}
-                                    id={"name"}
-                                    placeHolder={"e.g. call"}
-                                />
-                                <button className="bg-blue-300 py-2 px-4 rounded-md">Submit</button>
-                            </form>
-                        </div>
-                        <div className="bg-white mx-12 p-4 rounded-md">
-                            <h2>Result</h2>
-                            <div className="border border-blue-400 rounded-md p-2">
-                                <pre>
-                                    {result}
-                                </pre>
-                            </div>
-                        </div>
                     </div>
+
                 )}
                 {!session && (
                     <div className="flex flex-row space-x-4">
