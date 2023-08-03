@@ -86,7 +86,7 @@ const FantasyCaller = () => {
                                 </form>
                             </div>
                             <div className="flex flex-col w-2/3 border border-2 border-gray-300 p-4 rounded-md">
-                                <h2>Result</h2>
+                                <h2 className='uppercase font-semibold'>Result</h2>
                                 <div className="border border-2 border-purple-600 rounded-md p-2">
                                     <pre className="h-96 text-xs overflow-auto select-all">
                                         {result}
@@ -95,7 +95,7 @@ const FantasyCaller = () => {
                             </div>
                         </div>
                         <div className="py-4 px-6 rounded-md  border-2 border-gray-300">
-                            <h2>History</h2>
+                            <h2 className='uppercase font-semibold'>History</h2>
                             <ol >
                                 {previousCalls}
                             </ol>
