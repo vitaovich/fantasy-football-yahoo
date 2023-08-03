@@ -1,10 +1,13 @@
 import Input from "@/components/input";
 import useInput from "@/hooks/use-input";
 import { useState } from "react";
+import { signIn, signOut, useSession } from "next-auth/react"
+import Link from "next/link";
 
 const FantasyCaller = () => {
+    const { data: session, status } = useSession()
     const [apiCall, setApiCall] = useState<string>('');
-    const [result, setResult] = useState<string>('');
+    const [result, setResult] = useState<string>('No Result');
 
     const {
         value: enteredCall,
@@ -33,35 +36,75 @@ const FantasyCaller = () => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen space-y-24 bg-gray-300">
-            <h1>Fantasy Caller</h1>
-            <div className="flex flex-row">
-                <div className="bg-white mx-12 p-4 rounded-md">
-                    <h2>Input</h2>
-                    <form onSubmit={submitHandler} className='space-y-4'>
-                        <Input
-                            label={"API Call"}
-                            validationMessage={"This field is required."}
-                            value={enteredCall}
-                            hasError={callInputHasError}
-                            changeHandler={callChangedHandler}
-                            blurHandler={callBlurHandler}
-                            id={"name"}
-                            placeHolder={"e.g. call"}
-                        />
-                        <button className="bg-blue-300 py-2 px-4 rounded-md">Submit</button>
-                    </form>
-                </div>
-                <div className="bg-white mx-12 p-4 rounded-md">
-                    <h2>Result</h2>
-                    <div className="border border-blue-400 rounded-md p-2">
-                    {result}
-
+        <>
+            <div className="flex flex-col items-center justify-center min-h-screen space-y-24 bg-gray-300">
+                {!session && (
+                    <div className="flex flex-row space-x-4">
+                        <span>
+                            You are not signed in
+                        </span>
+                        <Link
+                            href={`/api/auth/signin`}
+                            className='bg-blue-400 rounded-md p-2 text-white'
+                            onClick={(e) => {
+                                e.preventDefault()
+                                signIn()
+                            }}
+                        >
+                            Sign in
+                        </Link>
                     </div>
-                </div>
-            </div>
+                )}
+                {session?.user && (
+                    <div className="flex flex-row space-x-4">
+                        <span >
+                            <small>Signed in as</small>
+                            <br />
+                            <strong>{session.user.email ?? session.user.name}</strong>
+                        </span>
+                        <Link
+                            href={`/api/auth/signout`}
+                            className='bg-blue-400 rounded-md px-4 text-white'
+                            onClick={(e) => {
+                                e.preventDefault()
+                                signOut()
+                            }}
+                        >
+                            Sign out
+                        </Link>
+                    </div>
+                )}
+                <h1>Fantasy Caller</h1>
 
-        </div>
+                {session && (
+                    <div className="flex flex-row">
+                        <div className="bg-white mx-12 p-4 rounded-md">
+                            <form onSubmit={submitHandler} className='space-y-4'>
+                                <Input
+                                    label={"API Call"}
+                                    validationMessage={"This field is required."}
+                                    value={enteredCall}
+                                    hasError={callInputHasError}
+                                    changeHandler={callChangedHandler}
+                                    blurHandler={callBlurHandler}
+                                    id={"name"}
+                                    placeHolder={"e.g. call"}
+                                />
+                                <button className="bg-blue-300 py-2 px-4 rounded-md">Submit</button>
+                            </form>
+                        </div>
+                        <div className="bg-white mx-12 p-4 rounded-md">
+                            <h2>Result</h2>
+                            <div className="border border-blue-400 rounded-md p-2">
+                                {result}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+            </div>
+        </>
+
     )
 }
 

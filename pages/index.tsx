@@ -4,6 +4,7 @@ import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useState, useEffect } from 'react'
 import { signIn, signOut, useSession } from "next-auth/react"
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -90,6 +91,7 @@ export default function Home() {
             </a>
           </>
         )}
+        <Link href="/fantasycaller">Fantasy Caller</Link>
         <button className='bg-gray-300 p-4' onClick={handleClick}>
           Click Me
         </button>
