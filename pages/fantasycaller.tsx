@@ -63,9 +63,9 @@ const FantasyCaller = () => {
 
                 <h1 className="text-4xl text-purple-600">Yahoo Fantasy API Caller</h1>
                 {session && (
-                    <div className="space-y-4">
+                    <div className="flex flex-col w-3/4 space-y-4">
                         <div className="flex flex-row space-x-4">
-                            <div className="border border-2 border-gray-300 p-4 rounded-md">
+                            <div className="w-1/3 border border-2 border-gray-300 p-4 rounded-md">
                                 <form onSubmit={handleSubmit} className='space-y-4'>
                                     <Input
                                         label={"API Call"}
@@ -80,10 +80,12 @@ const FantasyCaller = () => {
                                     <button className="bg-blue-300 py-2 px-4 rounded-md">Submit</button>
                                 </form>
                             </div>
-                            <div className="border border-2 border-gray-300 p-4 rounded-md">
+                            <div className="flex flex-col w-2/3 border border-2 border-gray-300 p-4 rounded-md">
                                 <h2>Result</h2>
-                                <div className="w-96 border border-2 border-blue-400 rounded-md p-2 whitespace-pre overflow-auto">
-                                    {result}
+                                <div className="border border-2 border-blue-400 rounded-md p-2">
+                                    <pre className="max-h-96 text-xs overflow-auto select-all">
+                                        {result}
+                                    </pre>
                                 </div>
                             </div>
                         </div>
