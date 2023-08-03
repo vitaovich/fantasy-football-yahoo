@@ -13,12 +13,28 @@ function GetSecret() {
   return mySecret ?? defaultValue;
 }
 
+async function getNFLTeams() {
+  const res = await fetch(`api/teams`)
+  const json = await res.json();
+  console.log("CALL api/teams:" + JSON.stringify(json));
+  return json;
+}
+
 export default function Home() {
   const mySecret = GetSecret();
   const { data: session, status } = useSession()
   const loading = status === "loading"
 
   const description = `My Secret: ${mySecret}`;
+
+  function handleClick() {
+    if (session) {
+      console.log("Active Session:" + JSON.stringify(session));
+    } else {
+      console.log("No Session:" + JSON.stringify(session));
+    }
+  }
+
   return (
     <>
       <h1 className="text-3xl">
@@ -51,6 +67,12 @@ export default function Home() {
                 style={{ backgroundImage: `url('${session.user.image}')` }}
               />
             )} */}
+            <Image
+              src={session.user.image}
+              alt="profile image"
+              width={50}
+              height={50}
+            />
             <span >
               <small>Signed in as</small>
               <br />
@@ -68,6 +90,12 @@ export default function Home() {
             </a>
           </>
         )}
+        <button className='bg-gray-300 p-4' onClick={handleClick}>
+          Click Me
+        </button>
+        <button className='bg-gray-300 p-4' onClick={getNFLTeams}>
+          Get Teams
+        </button>
       </div>
     </>
   )
