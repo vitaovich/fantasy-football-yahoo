@@ -90,11 +90,23 @@ const Index = () => {
     }
 
     const leagues = yahooLeagues.map((leagueData: any) => {
+        console.log(leagueData);
         return (
             <li key={leagueData.league_id} className="border border-gray-400 my-2 p-2 rounded-md">
-                <button onClick={() => handleLeagueSelect(leagueData)}>
-                    {leagueData.name}
-                </button>
+                <div className="flex flex-row space-x-4">
+                    {leagueData.logo_url && (
+                        <Image
+                            src={leagueData.logo_url}
+                            alt="profile image"
+                            width={50}
+                            height={50}
+                        />
+                    )}
+                    <button onClick={() => handleLeagueSelect(leagueData)}>
+                        {leagueData.name}
+                    </button>
+                </div>
+
             </li>
         );
     });
