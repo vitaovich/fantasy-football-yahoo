@@ -16,7 +16,7 @@ const Header: React.FC = () => {
     return (
         <>
             <header className="flex flex-row items-center justify-between p-2 border-b">
-                <div className="">Brand</div>
+                <div className="">Vantasy Vootball</div>
                 {loginStatus}
                 {!session && (
                     <Link
