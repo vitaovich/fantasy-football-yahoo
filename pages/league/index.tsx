@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from 'next/link'
 
 const LEAGUE_DATA = [
@@ -58,8 +58,23 @@ const TEAMS_DATA = [
 
 const Index = () => {
     // const leaguesData = TransformYahooLeagueContent(FANTASY_CONTENT_LEAGUES);
+    const [yahooLeagues, setYahooLeagues] = useState<any[]>([]);
     const [selectedLeague, setSelectedLeague] = useState<string | undefined>();
     const [selectedLeagueTeams, setSelectedLeagueTeams] = useState<any[]>([]);
+
+    useEffect(() => {
+        fetchYahooLeagues();
+    }, []);
+
+    const fetchYahooLeagues = async () => {
+        const res = await fetch('/api/yahoofantasysports', {
+            method: "POST",
+            body: JSON.stringify({call: `users;use_login=1/games;game_keys=nfl/leagues`})
+        })
+        const fantasySportsResult = await res.json();
+        const receivedLeagues = TransformYahooLeaguesContent(fantasySportsResult.result.fantasy_content);
+        setYahooLeagues(receivedLeagues);
+    }
 
     async function handleLeagueSelect(nextLeague: any) {
         const res = await fetch('/api/yahoofantasysports', {
@@ -72,7 +87,7 @@ const Index = () => {
         setSelectedLeagueTeams(selectedLeague);
     }
 
-    const leagues = LEAGUE_DATA.map((leagueData: any) => {
+    const leagues = yahooLeagues.map((leagueData: any) => {
         return (
             <li key={leagueData.league_id} className="border border-gray-400 my-2 p-2 rounded-md">
                 <button onClick={() => handleLeagueSelect(leagueData)}>
@@ -123,7 +138,7 @@ const Index = () => {
 }
 
 
-function TransformYahooLeagueContent(yahooFantasyLeagueContent: any) {
+function TransformYahooLeaguesContent(yahooFantasyLeagueContent: any) {
     const leagues = yahooFantasyLeagueContent.users[0].user[0].games[0].game[0].leagues[0].league.map((leagueData: any) => {
         const transformedLeague = {
             league_key: leagueData.league_key[0],
@@ -139,19 +154,6 @@ function TransformYahooLeagueContent(yahooFantasyLeagueContent: any) {
 }
 
 function TransformYahooTeamsContent(yahooFantasyLeagueContent: any) {
-    // {
-    //     team_key: "423.l.297239.t.1",
-    //     team_id: 1,
-    //     name: "PugetSoundPurpleKush",
-    //     url: "https://football.fantasysports.yahoo.com/f1/297239/1",
-    //     team_standing: {
-    //         outcome_totals: {
-    //             wins: 1,
-    //             losses: 2,
-    //             ties: 3
-    //         }
-    //     }
-    // }
     const leagues = yahooFantasyLeagueContent.league[0].standings[0].teams[0].team.map((teamData: any) => {
         const transformedTeam = {
             team_key: teamData.team_key[0],
