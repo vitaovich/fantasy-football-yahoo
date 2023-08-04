@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from 'next/link'
+import { signIn, signOut, useSession } from "next-auth/react"
 
 const LEAGUE_DATA = [
     {
@@ -57,7 +58,7 @@ const TEAMS_DATA = [
 ]
 
 const Index = () => {
-    // const leaguesData = TransformYahooLeagueContent(FANTASY_CONTENT_LEAGUES);
+    const { data: session, status } = useSession()
     const [yahooLeagues, setYahooLeagues] = useState<any[]>([]);
     const [selectedLeague, setSelectedLeague] = useState<string | undefined>();
     const [selectedLeagueTeams, setSelectedLeagueTeams] = useState<any[]>([]);
@@ -69,7 +70,7 @@ const Index = () => {
     const fetchYahooLeagues = async () => {
         const res = await fetch('/api/yahoofantasysports', {
             method: "POST",
-            body: JSON.stringify({call: `users;use_login=1/games;game_keys=nfl/leagues`})
+            body: JSON.stringify({ call: `users;use_login=1/games;game_keys=nfl/leagues` })
         })
         const fantasySportsResult = await res.json();
         const receivedLeagues = TransformYahooLeaguesContent(fantasySportsResult.result.fantasy_content);
@@ -79,7 +80,7 @@ const Index = () => {
     async function handleLeagueSelect(nextLeague: any) {
         const res = await fetch('/api/yahoofantasysports', {
             method: "POST",
-            body: JSON.stringify({call: `league/${nextLeague.league_key}/standings`})
+            body: JSON.stringify({ call: `league/${nextLeague.league_key}/standings` })
         })
         const fantasySportsResult = await res.json();
         const selectedLeague = TransformYahooTeamsContent(fantasySportsResult.result.fantasy_content);
@@ -111,29 +112,71 @@ const Index = () => {
     })
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen space-y-24 py-4">
-            <h1 className="text-4xl">Leagues</h1>
-            <div className="border border-2 border-gray-300 p-4 rounded-md text-center">
-                <ol>
-                    {leagues}
-                </ol>
-            </div>
-            <div className="border border-2 border-gray-300 p-4 rounded-md text-center">
-                {selectedLeague && (
-                    <>
-                        <h2 className="border-b border-gray-300 p-4">{selectedLeague}</h2>
+        <>
+            {!session && (
+                <div className="flex flex-row items-center space-x-4">
+                    <span>
+                        You are not signed in
+                    </span>
+                    <Link
+                        href={`/api/auth/signin`}
+                        className='bg-green-400 rounded-md py-2 px-4 text-white'
+                        onClick={(e) => {
+                            e.preventDefault()
+                            signIn()
+                        }}
+                    >
+                        Sign in
+                    </Link>
+                </div>
+            )}
+            {session?.user && (
+                <div className="flex flex-row items-center space-x-4">
+                    <span>
+                        <small className="m-2">Signed in as</small>
+                        <br />
+                        <strong className="m-2">{session.user.email ?? session.user.name}</strong>
+                    </span>
+                    <Link
+                        href={`/api/auth/signout`}
+                        className='bg-red-400 rounded-md py-2 px-4 text-white'
+                        onClick={(e) => {
+                            e.preventDefault()
+                            signOut()
+                        }}
+                    >
+                        Sign out
+                    </Link>
+                </div>
+            )}
+            {session?.user && (
+                <div className="flex flex-col items-center justify-center min-h-screen space-y-24 py-4">
+
+                    <h1 className="text-4xl">Leagues</h1>
+                    <div className="border border-2 border-gray-300 p-4 rounded-md text-center">
                         <ol>
-                            {teams}
+                            {leagues}
                         </ol>
-                    </>
+                    </div>
+                    <div className="border border-2 border-gray-300 p-4 rounded-md text-center">
+                        {selectedLeague && (
+                            <>
+                                <h2 className="border-b border-gray-300 p-4">{selectedLeague}</h2>
+                                <ol>
+                                    {teams}
+                                </ol>
+                            </>
 
-                )}
-                {!selectedLeague && (
-                    <h1 className="text-red-400">Please Select a league</h1>
-                )}
-            </div>
+                        )}
+                        {!selectedLeague && (
+                            <h1 className="text-red-400">Please Select a league</h1>
+                        )}
+                    </div>
 
-        </div>
+                </div>
+            )}
+
+        </>
     );
 }
 
