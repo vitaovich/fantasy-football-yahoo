@@ -38,6 +38,10 @@ export default NextAuth({
       return true
     },
     async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url
       return baseUrl
     },
     async session({ session, user, token }) {
@@ -55,12 +59,12 @@ export default NextAuth({
         }
         // console.log("Initial token", initialToken);
         return initialToken;
-      } 
+      }
       else if (Date.now() < (token.expires_at as number) * 1000) {
         // If the access token has not expired yet, return it
         // console.log("Current Token:", token);
         return token;
-      } 
+      }
       else {
         // If the access token has expired, try to refresh it
         try {
