@@ -29,7 +29,7 @@ async function makeApiCall(req: NextApiRequest, uri: string) {
                 }
             })
             const reqText = await request.text();
-            xml2js.parseString(reqText, (err, result) => {
+            xml2js.parseString(reqText, (err: any, result: any) => {
                 if(err) {
                     apiCallResult.message = 'Error parsing XML:', err;
                 } else {
