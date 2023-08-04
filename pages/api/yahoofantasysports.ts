@@ -24,7 +24,7 @@ async function makeApiCall(req: NextApiRequest, uri: string) {
                 method: "GET",
                 credentials: "include",
                 headers: {
-                    Authorization: `Bearer ${token.accessToken}`,  // <-- add token to request
+                    Authorization: `Bearer ${token.access_token}`,  // <-- add token to request
                     "Content-Type": "application/xml",
                 }
             })
