@@ -57,13 +57,15 @@ const TEAMS_DATA = [
 ]
 
 const Index = () => {
+    // const leaguesData = TransformYahooLeagueContent(FANTASY_CONTENT_LEAGUES);
+    // const teamsData = TransformYahooTeamsContent(FANTASY_CONTENT_TEAMS_EXAMPLE);
     const [selectedLeague, setSelectedLeague] = useState<string | undefined>();
-
+    
     function handleLeagueSelect(nextLeague: any) {
         setSelectedLeague(nextLeague.name);
     }
 
-    const leagues = LEAGUE_DATA.map((leagueData, idx) => {
+    const leagues = LEAGUE_DATA.map((leagueData: any) => {
         return (
             <li key={leagueData.league_id} className="border border-gray-400 my-2 p-2 rounded-md">
                 <button onClick={() => handleLeagueSelect(leagueData)}>
@@ -73,7 +75,7 @@ const Index = () => {
         );
     });
 
-    const teams = TEAMS_DATA.map((teamData, idx) => {
+    const teams = TEAMS_DATA.map((teamData: any) => {
         const totals = teamData.team_standing.outcome_totals;
         const teamWLT = `${totals.wins}-${totals.losses}-${totals.ties}`
         return (
@@ -111,6 +113,55 @@ const Index = () => {
 
         </div>
     );
+}
+
+
+function TransformYahooLeagueContent(yahooFantasyLeagueContent: any) {
+    const leagues = yahooFantasyLeagueContent.users[0].user[0].games[0].game[0].leagues[0].league.map((leagueData: any) => {
+        const transformedLeague = {
+            league_key: leagueData.league_key[0],
+            league_id: leagueData.league_id[0],
+            name: leagueData.name[0],
+            url: leagueData.url[0],
+            logo_url: leagueData.logo_url[0],
+            season: leagueData.season[0]
+        }
+        return transformedLeague;
+    })
+    return leagues;
+}
+
+function TransformYahooTeamsContent(yahooFantasyLeagueContent: any) {
+    // {
+    //     team_key: "423.l.297239.t.1",
+    //     team_id: 1,
+    //     name: "PugetSoundPurpleKush",
+    //     url: "https://football.fantasysports.yahoo.com/f1/297239/1",
+    //     team_standing: {
+    //         outcome_totals: {
+    //             wins: 1,
+    //             losses: 2,
+    //             ties: 3
+    //         }
+    //     }
+    // }
+    const leagues = yahooFantasyLeagueContent.league[0].standings[0].teams[0].team.map((teamData: any) => {
+        const transformedTeam = {
+            team_key: teamData.team_key[0],
+            team_id: teamData.team_id[0],
+            name: teamData.name[0],
+            url: teamData.url[0],
+            team_standing: {
+                outcome_totals: {
+                    wins: teamData.team_standings[0].outcome_totals[0].wins[0],
+                    losses: teamData.team_standings[0].outcome_totals[0].losses[0],
+                    ties: teamData.team_standings[0].outcome_totals[0].ties[0],
+                }
+            }
+        }
+        return transformedTeam;
+    })
+    return leagues;
 }
 
 export default Index
