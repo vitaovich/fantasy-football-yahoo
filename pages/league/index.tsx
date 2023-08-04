@@ -58,11 +58,18 @@ const TEAMS_DATA = [
 
 const Index = () => {
     // const leaguesData = TransformYahooLeagueContent(FANTASY_CONTENT_LEAGUES);
-    // const teamsData = TransformYahooTeamsContent(FANTASY_CONTENT_TEAMS_EXAMPLE);
     const [selectedLeague, setSelectedLeague] = useState<string | undefined>();
-    
-    function handleLeagueSelect(nextLeague: any) {
+    const [selectedLeagueTeams, setSelectedLeagueTeams] = useState<any[]>([]);
+
+    async function handleLeagueSelect(nextLeague: any) {
+        const res = await fetch('/api/yahoofantasysports', {
+            method: "POST",
+            body: JSON.stringify({call: `league/${nextLeague.league_key}/standings`})
+        })
+        const fantasySportsResult = await res.json();
+        const selectedLeague = TransformYahooTeamsContent(fantasySportsResult.result.fantasy_content);
         setSelectedLeague(nextLeague.name);
+        setSelectedLeagueTeams(selectedLeague);
     }
 
     const leagues = LEAGUE_DATA.map((leagueData: any) => {
@@ -75,7 +82,7 @@ const Index = () => {
         );
     });
 
-    const teams = TEAMS_DATA.map((teamData: any) => {
+    const teams = selectedLeagueTeams.map((teamData: any) => {
         const totals = teamData.team_standing.outcome_totals;
         const teamWLT = `${totals.wins}-${totals.losses}-${totals.ties}`
         return (
