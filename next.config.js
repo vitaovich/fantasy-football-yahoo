@@ -1,3 +1,5 @@
+const { hostname } = require('os')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -6,6 +8,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "**.yimg.com",
+      },
+      {
+        protocol: "https",
+        hostname: "yahoofantasysports-res.cloudinary.com"
       }
     ]
   }

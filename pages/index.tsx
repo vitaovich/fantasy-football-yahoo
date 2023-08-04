@@ -36,15 +36,15 @@ export default function Home() {
         )}
         {session?.user && (
           <>
-            {/* <Image
-              src={session.user.image}
-              alt="profile image"
-              width={50}
-              height={50}
-            /> */}
             <Link className='bg-blue-400 text-white py-4 px-2 rounded-md' href="/fantasycaller">Fantasy Caller</Link>
             <Link className='bg-blue-400 text-white py-4 px-2 rounded-md' href="/league">League Info</Link>
 
+            <Image
+              src={session.user.image!}
+              alt="profile image"
+              width={50}
+              height={50}
+            />
             <span >
               <small>Signed in as</small>
               <br />

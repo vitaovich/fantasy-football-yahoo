@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from 'next/link'
 import { signIn, signOut, useSession } from "next-auth/react"
+import Image from 'next/image'
 
 const LEAGUE_DATA = [
     {
@@ -104,6 +105,12 @@ const Index = () => {
         return (
             <li key={teamData.team_id} className="">
                 <div className="flex flex-row justify-between items-center">
+                    <Image
+                        src={teamData.team_logo_url!}
+                        alt="profile image"
+                        width={50}
+                        height={50}
+                    />
                     <Link className='py-4 px-2 hover:text-blue-500 mr-6' href={teamData.url}>{teamData.name}</Link>
                     <div>{teamWLT}</div>
                 </div>
@@ -203,6 +210,7 @@ function TransformYahooTeamsContent(yahooFantasyLeagueContent: any) {
             team_id: teamData.team_id[0],
             name: teamData.name[0],
             url: teamData.url[0],
+            team_logo_url: teamData.team_logos[0].team_logo[0].url[0],
             team_standing: {
                 outcome_totals: {
                     wins: teamData.team_standings[0].outcome_totals[0].wins[0],
