@@ -103,42 +103,6 @@ const FantasyCaller = () => {
                     </div>
 
                 )}
-                {!session && (
-                    <div className="flex flex-row items-center space-x-4">
-                        <span>
-                            You are not signed in
-                        </span>
-                        <Link
-                            href={`/api/auth/signin`}
-                            className='bg-green-400 rounded-md py-2 px-4 text-white'
-                            onClick={(e) => {
-                                e.preventDefault()
-                                signIn()
-                            }}
-                        >
-                            Sign in
-                        </Link>
-                    </div>
-                )}
-                {session?.user && (
-                    <div className="flex flex-row items-center space-x-4">
-                        <span>
-                            <small className="m-2">Signed in as</small>
-                            <br />
-                            <strong className="m-2">{session.user.email ?? session.user.name}</strong>
-                        </span>
-                        <Link
-                            href={`/api/auth/signout`}
-                            className='bg-red-400 rounded-md py-2 px-4 text-white'
-                            onClick={(e) => {
-                                e.preventDefault()
-                                signOut()
-                            }}
-                        >
-                            Sign out
-                        </Link>
-                    </div>
-                )}
             </div>
         </>
 
