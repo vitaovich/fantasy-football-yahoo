@@ -4,27 +4,17 @@ import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useState, useEffect } from 'react'
 import { signIn, signOut, useSession } from "next-auth/react"
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
-function GetSecret() {
-  const mySecret: string | undefined = process.env.NEXT_PUBLIC_MY_SECRET;
-  const defaultValue: string = "no secret found";
-  return mySecret ?? defaultValue;
-}
-
 export default function Home() {
-  const mySecret = GetSecret();
   const { data: session, status } = useSession()
   const loading = status === "loading"
 
-  const description = `My Secret: ${mySecret}`;
   return (
     <>
-      <h1 className="text-3xl">
-        Starter NextJS TailwindCSS
-      </h1>
-      <div className="">{description}</div>
+
       <div className="flex flex-row justify-between m-4">
         {!session && (
           <>
@@ -46,11 +36,15 @@ export default function Home() {
         )}
         {session?.user && (
           <>
-            {/* {session.user.image && (
-              <span
-                style={{ backgroundImage: `url('${session.user.image}')` }}
-              />
-            )} */}
+            {/* <Image
+              src={session.user.image}
+              alt="profile image"
+              width={50}
+              height={50}
+            /> */}
+            <Link className='bg-blue-400 text-white py-4 px-2 rounded-md' href="/fantasycaller">Fantasy Caller</Link>
+            <Link className='bg-blue-400 text-white py-4 px-2 rounded-md' href="/league">League Info</Link>
+
             <span >
               <small>Signed in as</small>
               <br />
