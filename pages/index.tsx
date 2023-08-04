@@ -43,6 +43,7 @@ export default function Home() {
               height={50}
             /> */}
             <Link className='bg-blue-400 text-white py-4 px-2 rounded-md' href="/fantasycaller">Fantasy Caller</Link>
+            <Link className='bg-blue-400 text-white py-4 px-2 rounded-md' href="/league">League Info</Link>
 
             <span >
               <small>Signed in as</small>
