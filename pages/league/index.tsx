@@ -149,7 +149,7 @@ const Index = () => {
                     </Link>
                 </div>
             )}
-            {session?.user && (
+            {session && (
                 <div className="flex flex-col items-center justify-center min-h-screen space-y-24 py-4">
 
                     <h1 className="text-4xl">Leagues</h1>
