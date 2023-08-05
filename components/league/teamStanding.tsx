@@ -31,11 +31,7 @@ const TeamStanding: React.FC<{ team: TeamInfo }> = (props) => {
                         <p className="text-xs">{team.outcome.getWinloss()}</p>
                     </div>
                 </div>
-
-                <div>{team.outcome.pointsFor}</div>
-                <div>{team.outcome.pointsAgainst}</div>
             </div>
-
         </>
     );
 }

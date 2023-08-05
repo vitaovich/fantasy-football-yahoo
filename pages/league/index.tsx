@@ -6,6 +6,7 @@ import Container from "@/components/league/container";
 import TeamInfo from "@/components/league/teamInfo";
 import TeamOutcome from "@/components/league/teamOutcome";
 import TeamStanding from "@/components/league/teamStanding";
+import TeamTable from "@/components/league/teamTable";
 
 const LEAGUE_DATA = [
     {
@@ -173,14 +174,6 @@ const Index = () => {
         );
     });
 
-    const teams = selectedLeagueTeams.map((teamData: TeamInfo) => {
-        return (
-            <li key={teamData.id} className="">
-                <TeamStanding team={teamData} />
-            </li>
-        );
-    })
-
     return (
         <div className="flex flex-col py-4">
             {!session && (
@@ -198,9 +191,7 @@ const Index = () => {
                     </Container>
                     {selectedLeague && (
                         <Container title={selectedLeague}>
-                            <ol>
-                                {teams}
-                            </ol>
+                            <TeamTable teams={selectedLeagueTeams} />
                         </Container>
                     )}
                     {!selectedLeague && (
