@@ -175,20 +175,9 @@ const Index = () => {
     });
 
     const teams = selectedLeagueTeams.map((teamData: TeamInfo) => {
-        const totals = teamData.outcome;
-        const teamWLT = `${totals.wins}-${totals.losses}-${totals.ties}`
         return (
             <li key={teamData.id} className="">
-                <div className="flex flex-row justify-between items-center">
-                    <Image
-                        src={teamData.logoUrl!}
-                        alt="profile image"
-                        width={50}
-                        height={50}
-                    />
-                    <Link className='py-4 px-2 hover:text-blue-500 mr-6' href={teamData.url}>{teamData.name}</Link>
-                    <div>{teamWLT}</div>
-                </div>
+                <TeamStanding team={teamData} />
             </li>
         );
     })
@@ -211,7 +200,6 @@ const Index = () => {
                     {selectedLeague && (
                         <Container title={selectedLeague} className="bg-gray-200">
                             <ol>
-                                <TeamStanding />
                                 {teams}
                             </ol>
                         </Container>
