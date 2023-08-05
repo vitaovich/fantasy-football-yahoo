@@ -302,7 +302,7 @@ function TransformYahooTeamsContent(yahooFantasyLeagueContent: any) {
             }
         }
         const teamOutcome = new TeamOutcome(team.standing.wins,team.standing.losses,team.standing.ties)
-        const transformedTeam = new TeamInfo(team.team_id, team.team_key, team.name, team.url, team.team_logo_url, teamOutcome);
+        const transformedTeam = new TeamInfo(team.team_id, team.team_key, team.name, team.url, teamOutcome, team.team_logo_url);
         return transformedTeam;
     })
     return leagues;

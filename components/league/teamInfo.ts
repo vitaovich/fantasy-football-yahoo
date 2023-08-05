@@ -8,7 +8,7 @@ class TeamInfo {
     logoUrl?: string;
     outcome: TeamOutcome
 
-    constructor(id: string, key:string, name: string, url: string, logoUrl?: string, outcome: TeamOutcome) {
+    constructor(id: string, key:string, name: string, url: string, outcome: TeamOutcome, logoUrl?: string) {
         this.id = id;
         this.key = key;
         this.name = name;
