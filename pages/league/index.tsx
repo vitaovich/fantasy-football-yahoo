@@ -90,7 +90,7 @@ const Index = () => {
     }
 
     const leagues = yahooLeagues.map((leagueData: any) => {
-        console.log(leagueData);
+        // console.log(leagueData);
         return (
             <li key={leagueData.league_id} className="border border-gray-400 my-2 p-2 rounded-md">
                 <div className="flex flex-row space-x-4">

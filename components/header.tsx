@@ -6,7 +6,7 @@ const Header: React.FC = () => {
 
     const loginStatus = session ? (
         <span>
-            <small className="m-2">Signed in as</small>
+            <small className="m-2 hidden md:inline">Signed in as</small>
             <strong className="m-2">{session.user?.email ?? session.user?.name}</strong>
         </span>
     ) : (
@@ -15,8 +15,8 @@ const Header: React.FC = () => {
     
     return (
         <>
-            <header className="flex flex-row items-center justify-between p-2 border-b">
-                <div className="">Vantasy Vootball</div>
+            <header className="flex flex-col items-center space-y-2 pb-2 justify-between border-b md:space-y-0 md:flex-row md:pb-0">
+                <div className="bg-sky-500 w-full text-center py-2 px-4 text-white md:w-auto">Vantasy Vootball</div>
                 {loginStatus}
                 {!session && (
                     <Link
