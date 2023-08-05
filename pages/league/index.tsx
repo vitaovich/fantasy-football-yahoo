@@ -26,96 +26,96 @@ const LEAGUE_DATA = [
     }
 ]
 
-const TEAMS_DATA: TeamInfo[] = [
-    {
-        "id": "1",
-        "key": "423.l.50621.t.1",
-        "name": "Nice Dak No Romo",
-        "url": "https://football.fantasysports.yahoo.com/f1/50621/1",
-        "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/99597e43c9b4c4fae82ab889ca6e353d72c1a5dbe6671366e12b58d0f926aae8.png",
-        "outcome": new TeamOutcome(1, 2, 3)
-    },
-    {
-        "id": "2",
-        "key": "423.l.50621.t.2",
-        "name": "Adam's Awesome Team",
-        "url": "https://football.fantasysports.yahoo.com/f1/50621/2",
-        "logoUrl": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_4_a.png",
-        "outcome": new TeamOutcome(1, 2, 3)
-    },
-    {
-        "id": "3",
-        "key": "423.l.50621.t.3",
-        "name": "Chuckie Gruden's Pool of Tears",
-        "url": "https://football.fantasysports.yahoo.com/f1/50621/3",
-        "logoUrl": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_4_t.png",
-        "outcome": new TeamOutcome(1, 2, 3)
-    },
-    {
-        "id": "4",
-        "key": "423.l.50621.t.4",
-        "name": "Michael's Majestic Team",
-        "url": "https://football.fantasysports.yahoo.com/f1/50621/4",
-        "logoUrl": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_8_m.png",
-        "outcome": new TeamOutcome(1, 2, 3)
-    },
-    {
-        "id": "5",
-        "key": "423.l.50621.t.5",
-        "name": "No Tats-land",
-        "url": "https://football.fantasysports.yahoo.com/f1/50621/5",
-        "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/26033559949_6570f7.jpg",
-        "outcome": new TeamOutcome(1, 2, 3)
-    },
-    {
-        "id": "6",
-        "key": "423.l.50621.t.6",
-        "name": "Ross Overcooked",
-        "url": "https://football.fantasysports.yahoo.com/f1/50621/6",
-        "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/691a6ad038fd77ae745f75225156cc825496b5894c4c0b70038447d38cbb7a0d.jpg",
-        "outcome": new TeamOutcome(1, 2, 3)
-    },
-    {
-        "id": "7",
-        "key": "423.l.50621.t.7",
-        "name": "SPDEEZ NUTZ",
-        "url": "https://football.fantasysports.yahoo.com/f1/50621/7",
-        "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/6ddc55d12aa8cc848e0935193f72a7958219cd56893cdefe34041389a2884b3f.jpg",
-        "outcome": new TeamOutcome(1, 2, 3)
-    },
-    {
-        "id": "8",
-        "key": "423.l.50621.t.8",
-        "name": "Stafford Infection",
-        "url": "https://football.fantasysports.yahoo.com/f1/50621/8",
-        "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/1589fd6e2e5ce521082df3c6ea345f1d5b9730ad193dccf56210f046161bdd65.jpg",
-        "outcome": new TeamOutcome(1, 2, 3)
-    },
-    {
-        "id": "9",
-        "key": "423.l.50621.t.9",
-        "name": "Unicorn power",
-        "url": "https://football.fantasysports.yahoo.com/f1/50621/9",
-        "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/1ca152afee1f812e3fb6b6c33975f37480c09ae942fe0d2e24f1682728dfbc0d.jpg",
-        "outcome": new TeamOutcome(1, 2, 3)
-    },
-    {
-        "id": "10",
-        "key": "423.l.50621.t.10",
-        "name": "Well SHIIIIITTT!",
-        "url": "https://football.fantasysports.yahoo.com/f1/50621/10",
-        "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/22af1062e144bb6b2eaba07c4625d35e8e83b56cf9ae13f10b99c695b6cc1940.jpg",
-        "outcome": new TeamOutcome(1, 2, 3)
-    },
-    {
-        "id": "11",
-        "key": "423.l.50621.t.11",
-        "name": "Jason Eaton's Amazing Team",
-        "url": "https://football.fantasysports.yahoo.com/f1/50621/11",
-        "logoUrl": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_9_j.png",
-        "outcome": new TeamOutcome(1, 2, 3)
-    }
-]
+// const TEAMS_DATA: TeamInfo[] = [
+//     {
+//         "id": "1",
+//         "key": "423.l.50621.t.1",
+//         "name": "Nice Dak No Romo",
+//         "url": "https://football.fantasysports.yahoo.com/f1/50621/1",
+//         "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/99597e43c9b4c4fae82ab889ca6e353d72c1a5dbe6671366e12b58d0f926aae8.png",
+//         "outcome": new TeamOutcome(1, 2, 3)
+//     },
+//     {
+//         "id": "2",
+//         "key": "423.l.50621.t.2",
+//         "name": "Adam's Awesome Team",
+//         "url": "https://football.fantasysports.yahoo.com/f1/50621/2",
+//         "logoUrl": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_4_a.png",
+//         "outcome": new TeamOutcome(1, 2, 3)
+//     },
+//     {
+//         "id": "3",
+//         "key": "423.l.50621.t.3",
+//         "name": "Chuckie Gruden's Pool of Tears",
+//         "url": "https://football.fantasysports.yahoo.com/f1/50621/3",
+//         "logoUrl": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_4_t.png",
+//         "outcome": new TeamOutcome(1, 2, 3)
+//     },
+//     {
+//         "id": "4",
+//         "key": "423.l.50621.t.4",
+//         "name": "Michael's Majestic Team",
+//         "url": "https://football.fantasysports.yahoo.com/f1/50621/4",
+//         "logoUrl": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_8_m.png",
+//         "outcome": new TeamOutcome(1, 2, 3)
+//     },
+//     {
+//         "id": "5",
+//         "key": "423.l.50621.t.5",
+//         "name": "No Tats-land",
+//         "url": "https://football.fantasysports.yahoo.com/f1/50621/5",
+//         "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/26033559949_6570f7.jpg",
+//         "outcome": new TeamOutcome(1, 2, 3)
+//     },
+//     {
+//         "id": "6",
+//         "key": "423.l.50621.t.6",
+//         "name": "Ross Overcooked",
+//         "url": "https://football.fantasysports.yahoo.com/f1/50621/6",
+//         "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/691a6ad038fd77ae745f75225156cc825496b5894c4c0b70038447d38cbb7a0d.jpg",
+//         "outcome": new TeamOutcome(1, 2, 3)
+//     },
+//     {
+//         "id": "7",
+//         "key": "423.l.50621.t.7",
+//         "name": "SPDEEZ NUTZ",
+//         "url": "https://football.fantasysports.yahoo.com/f1/50621/7",
+//         "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/6ddc55d12aa8cc848e0935193f72a7958219cd56893cdefe34041389a2884b3f.jpg",
+//         "outcome": new TeamOutcome(1, 2, 3)
+//     },
+//     {
+//         "id": "8",
+//         "key": "423.l.50621.t.8",
+//         "name": "Stafford Infection",
+//         "url": "https://football.fantasysports.yahoo.com/f1/50621/8",
+//         "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/1589fd6e2e5ce521082df3c6ea345f1d5b9730ad193dccf56210f046161bdd65.jpg",
+//         "outcome": new TeamOutcome(1, 2, 3)
+//     },
+//     {
+//         "id": "9",
+//         "key": "423.l.50621.t.9",
+//         "name": "Unicorn power",
+//         "url": "https://football.fantasysports.yahoo.com/f1/50621/9",
+//         "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/1ca152afee1f812e3fb6b6c33975f37480c09ae942fe0d2e24f1682728dfbc0d.jpg",
+//         "outcome": new TeamOutcome(1, 2, 3)
+//     },
+//     {
+//         "id": "10",
+//         "key": "423.l.50621.t.10",
+//         "name": "Well SHIIIIITTT!",
+//         "url": "https://football.fantasysports.yahoo.com/f1/50621/10",
+//         "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/22af1062e144bb6b2eaba07c4625d35e8e83b56cf9ae13f10b99c695b6cc1940.jpg",
+//         "outcome": new TeamOutcome(1, 2, 3)
+//     },
+//     {
+//         "id": "11",
+//         "key": "423.l.50621.t.11",
+//         "name": "Jason Eaton's Amazing Team",
+//         "url": "https://football.fantasysports.yahoo.com/f1/50621/11",
+//         "logoUrl": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_9_j.png",
+//         "outcome": new TeamOutcome(1, 2, 3)
+//     }
+// ]
 
 const Index = () => {
     const { data: session, status } = useSession()
@@ -240,6 +240,7 @@ function TransformYahooTeamsContent(yahooFantasyLeagueContent: any) {
             name: teamData.name[0],
             url: teamData.url[0],
             team_logo_url: teamData.team_logos[0].team_logo[0].url[0],
+            manager: teamData.managers[0].manager[0].nickname[0],
             standing: {
                 wins: teamData.team_standings[0].outcome_totals[0].wins[0],
                 losses: teamData.team_standings[0].outcome_totals[0].losses[0],
@@ -247,7 +248,7 @@ function TransformYahooTeamsContent(yahooFantasyLeagueContent: any) {
             }
         }
         const teamOutcome = new TeamOutcome(team.standing.wins, team.standing.losses, team.standing.ties)
-        const transformedTeam = new TeamInfo(team.team_id, team.team_key, team.name, team.url, teamOutcome, team.team_logo_url);
+        const transformedTeam = new TeamInfo(team.team_id, team.team_key, team.name, team.url, teamOutcome, team.manager, team.team_logo_url);
         return transformedTeam;
     })
     return leagues;

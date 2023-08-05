@@ -25,8 +25,9 @@ const TeamStanding: React.FC<{team: TeamInfo}> = (props) => {
                     className="rounded-full"
                 />
                 <div className="flex flex-col mx-2">
-                    <h1 className="font-bold">{team.name}</h1>
-                    <p className="text-sm">{team.outcome.getWinloss()}</p>
+                    <h1 className="text-sm font-bold">{team.name}</h1>
+                    <p className="text-xs">{team.manager}</p>
+                    <p className="text-xs">{team.outcome.getWinloss()}</p>
                 </div>
             </div>
 
