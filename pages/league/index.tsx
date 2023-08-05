@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Container from "@/components/league/container";
 import TeamInfo from "@/components/league/teamInfo";
 import TeamOutcome from "@/components/league/teamOutcome";
+import TeamStanding from "@/components/league/teamStanding";
 
 const LEAGUE_DATA = [
     {
@@ -32,11 +33,7 @@ const TEAMS_DATA: TeamInfo[] = [
       "name": "Nice Dak No Romo",
       "url": "https://football.fantasysports.yahoo.com/f1/50621/1",
       "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/99597e43c9b4c4fae82ab889ca6e353d72c1a5dbe6671366e12b58d0f926aae8.png",
-      "outcome": {
-        "wins": 0,
-        "losses": 0,
-        "ties": 0
-      }
+      "outcome": new TeamOutcome(1, 2, 3)
     },
     {
       "id": "2",
@@ -44,11 +41,7 @@ const TEAMS_DATA: TeamInfo[] = [
       "name": "Adam's Awesome Team",
       "url": "https://football.fantasysports.yahoo.com/f1/50621/2",
       "logoUrl": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_4_a.png",
-      "outcome": {
-        "wins": 0,
-        "losses": 0,
-        "ties": 0
-      }
+      "outcome": new TeamOutcome(1, 2, 3)
     },
     {
       "id": "3",
@@ -56,11 +49,7 @@ const TEAMS_DATA: TeamInfo[] = [
       "name": "Chuckie Gruden's Pool of Tears",
       "url": "https://football.fantasysports.yahoo.com/f1/50621/3",
       "logoUrl": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_4_t.png",
-      "outcome": {
-        "wins": 0,
-        "losses": 0,
-        "ties": 0
-      }
+      "outcome": new TeamOutcome(1, 2, 3)
     },
     {
       "id": "4",
@@ -68,11 +57,7 @@ const TEAMS_DATA: TeamInfo[] = [
       "name": "Michael's Majestic Team",
       "url": "https://football.fantasysports.yahoo.com/f1/50621/4",
       "logoUrl": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_8_m.png",
-      "outcome": {
-        "wins": 0,
-        "losses": 0,
-        "ties": 0
-      }
+      "outcome": new TeamOutcome(1, 2, 3)
     },
     {
       "id": "5",
@@ -80,11 +65,7 @@ const TEAMS_DATA: TeamInfo[] = [
       "name": "No Tats-land",
       "url": "https://football.fantasysports.yahoo.com/f1/50621/5",
       "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/26033559949_6570f7.jpg",
-      "outcome": {
-        "wins": 0,
-        "losses": 0,
-        "ties": 0
-      }
+      "outcome": new TeamOutcome(1, 2, 3)
     },
     {
       "id": "6",
@@ -92,11 +73,7 @@ const TEAMS_DATA: TeamInfo[] = [
       "name": "Ross Overcooked",
       "url": "https://football.fantasysports.yahoo.com/f1/50621/6",
       "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/691a6ad038fd77ae745f75225156cc825496b5894c4c0b70038447d38cbb7a0d.jpg",
-      "outcome": {
-        "wins": 0,
-        "losses": 0,
-        "ties": 0
-      }
+      "outcome": new TeamOutcome(1, 2, 3)
     },
     {
       "id": "7",
@@ -104,11 +81,7 @@ const TEAMS_DATA: TeamInfo[] = [
       "name": "SPDEEZ NUTZ",
       "url": "https://football.fantasysports.yahoo.com/f1/50621/7",
       "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/6ddc55d12aa8cc848e0935193f72a7958219cd56893cdefe34041389a2884b3f.jpg",
-      "outcome": {
-        "wins": 0,
-        "losses": 0,
-        "ties": 0
-      }
+      "outcome": new TeamOutcome(1, 2, 3)
     },
     {
       "id": "8",
@@ -116,11 +89,7 @@ const TEAMS_DATA: TeamInfo[] = [
       "name": "Stafford Infection",
       "url": "https://football.fantasysports.yahoo.com/f1/50621/8",
       "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/1589fd6e2e5ce521082df3c6ea345f1d5b9730ad193dccf56210f046161bdd65.jpg",
-      "outcome": {
-        "wins": 0,
-        "losses": 0,
-        "ties": 0
-      }
+      "outcome": new TeamOutcome(1, 2, 3)
     },
     {
       "id": "9",
@@ -128,11 +97,7 @@ const TEAMS_DATA: TeamInfo[] = [
       "name": "Unicorn power",
       "url": "https://football.fantasysports.yahoo.com/f1/50621/9",
       "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/1ca152afee1f812e3fb6b6c33975f37480c09ae942fe0d2e24f1682728dfbc0d.jpg",
-      "outcome": {
-        "wins": 0,
-        "losses": 0,
-        "ties": 0
-      }
+      "outcome": new TeamOutcome(1, 2, 3)
     },
     {
       "id": "10",
@@ -140,11 +105,7 @@ const TEAMS_DATA: TeamInfo[] = [
       "name": "Well SHIIIIITTT!",
       "url": "https://football.fantasysports.yahoo.com/f1/50621/10",
       "logoUrl": "https://yahoofantasysports-res.cloudinary.com/image/upload/t_s192sq/fantasy-logos/22af1062e144bb6b2eaba07c4625d35e8e83b56cf9ae13f10b99c695b6cc1940.jpg",
-      "outcome": {
-        "wins": 0,
-        "losses": 0,
-        "ties": 0
-      }
+      "outcome": new TeamOutcome(1, 2, 3)
     },
     {
       "id": "11",
@@ -152,11 +113,7 @@ const TEAMS_DATA: TeamInfo[] = [
       "name": "Jason Eaton's Amazing Team",
       "url": "https://football.fantasysports.yahoo.com/f1/50621/11",
       "logoUrl": "https://s.yimg.com/cv/apiv2/default/nfl/nfl_9_j.png",
-      "outcome": {
-        "wins": 0,
-        "losses": 0,
-        "ties": 0
-      }
+      "outcome": new TeamOutcome(1, 2, 3)
     }
   ]
 
@@ -254,6 +211,7 @@ const Index = () => {
                     {selectedLeague && (
                         <Container title={selectedLeague} className="bg-gray-200">
                             <ol>
+                                <TeamStanding />
                                 {teams}
                             </ol>
                         </Container>

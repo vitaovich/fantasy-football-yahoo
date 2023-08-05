@@ -8,5 +8,9 @@ class TeamOutcome {
         this.losses = losses;
         this.ties = ties;
     }
+
+     getWinloss() {
+        return `${this.wins}-${this.losses}-${this.ties}`;
+    }
 }
  export default TeamOutcome;
