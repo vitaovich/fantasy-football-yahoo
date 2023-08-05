@@ -1,0 +1,17 @@
+.red_bg {
+    background-color: red;
+}
+
+.animation {
+    width: 140px;
+    height: 108px;
+    background-color: red;
+    background: url('/assets/images/keyboard.webp') left center;
+    background-size: cover;
+    animation: play 1.5s steps(10) infinite;
+    display: inline-block;
+}
+
+@keyframes play {
+    100% { background-position: -1000px;}
+}
