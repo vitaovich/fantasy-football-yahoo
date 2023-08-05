@@ -3,6 +3,7 @@ import useInput from "@/hooks/use-input";
 import { useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react"
 import Link from "next/link";
+import Container from "@/components/fantasycaller/container";
 
 const FantasyCaller = () => {
     const { data: session, status } = useSession()
@@ -51,10 +52,10 @@ const FantasyCaller = () => {
         return (
             <li key={idx} className="my-2">
                 <div className="flex flex-row items-center justify-between border-t border-gray-300 p-2">
-                    <span className="select-all">
+                    <div className="text-xs">
                         {call}
-                    </span>
-                    <button className="ml-4 bg-purple-600 rounded-md px-4 py-2 text-white" onClick={() => handleResult(call)}>
+                    </div>
+                    <button className="hidden ml-4 bg-purple-600 rounded-md px-4 py-2 text-white md:inline" onClick={() => handleResult(call)}>
                         Call
                     </button>
                 </div>
@@ -65,12 +66,12 @@ const FantasyCaller = () => {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center min-h-screen space-y-24 py-4">
-                <h1 className="text-4xl text-purple-600">Yahoo! Fantasy API Caller</h1>
+            <div className="flex flex-col py-4">
+                <h1 className="my-4 grow text-center text-2xl md:text-4xl text-purple-600">Yahoo! Fantasy API Caller</h1>
                 {session && (
-                    <div className="flex flex-col w-3/4 space-y-4">
-                        <div className="flex flex-row space-x-4">
-                            <div className="w-1/3 border border-2 border-gray-300 p-4 rounded-md">
+                    <div className="flex flex-col mx-2 md:mx-12 space-y-4">
+                        <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:space-x-4">
+                            <Container>
                                 <form onSubmit={handleSubmit} className='space-y-4'>
                                     <Input
                                         label={"API Call"}
@@ -84,22 +85,20 @@ const FantasyCaller = () => {
                                     />
                                     <button className="bg-green-400 text-white py-2 px-4 rounded-md">Submit</button>
                                 </form>
-                            </div>
-                            <div className="flex flex-col w-2/3 border border-2 border-gray-300 p-4 rounded-md">
-                                <h2 className='uppercase font-semibold'>Result</h2>
+                            </Container>
+                            <Container title='result' className="grow">
                                 <div className="border border-2 border-purple-600 rounded-md p-2">
-                                    <pre className="h-96 text-xs overflow-auto select-all">
+                                    <pre className="h-96 whitespace-pre-wrap text-xs overflow-auto select-all">
                                         {result}
                                     </pre>
                                 </div>
-                            </div>
+                            </Container>
                         </div>
-                        <div className="py-4 px-6 rounded-md  border-2 border-gray-300">
-                            <h2 className='uppercase font-semibold'>History</h2>
+                        <Container title='history'>
                             <ol >
                                 {previousCalls}
                             </ol>
-                        </div>
+                        </Container>
                     </div>
 
                 )}
