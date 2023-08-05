@@ -245,9 +245,11 @@ function TransformYahooTeamsContent(yahooFantasyLeagueContent: any) {
                 wins: teamData.team_standings[0].outcome_totals[0].wins[0],
                 losses: teamData.team_standings[0].outcome_totals[0].losses[0],
                 ties: teamData.team_standings[0].outcome_totals[0].ties[0],
+                pointsFor: teamData.team_standings[0].points_for[0],
+                pointsAgainst: teamData.team_standings[0].points_against[0],
             }
         }
-        const teamOutcome = new TeamOutcome(team.standing.wins, team.standing.losses, team.standing.ties)
+        const teamOutcome = new TeamOutcome(team.standing.wins, team.standing.losses, team.standing.ties, team.standing.pointsFor, team.standing.pointsAgainst)
         const transformedTeam = new TeamInfo(team.team_id, team.team_key, team.name, team.url, teamOutcome, team.manager, team.team_logo_url);
         return transformedTeam;
     })

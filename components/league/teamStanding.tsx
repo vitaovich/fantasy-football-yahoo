@@ -12,23 +12,28 @@ import TeamOutcome from "./teamOutcome";
 //     "outcome": new TeamOutcome(1, 2, 3)
 // }
 
-const TeamStanding: React.FC<{team: TeamInfo}> = (props) => {
+const TeamStanding: React.FC<{ team: TeamInfo }> = (props) => {
     const team = props.team;
     return (
         <>
-            <div className="my-2 flex flex-row">
-                <Image
-                    src={team.logoUrl!}
-                    alt="profile image"
-                    width={50}
-                    height={50}
-                    className="rounded-full"
-                />
-                <div className="flex flex-col mx-2">
-                    <h1 className="text-sm font-bold">{team.name}</h1>
-                    <p className="text-xs">{team.manager}</p>
-                    <p className="text-xs">{team.outcome.getWinloss()}</p>
+            <div className="my-2 flex flex-row justify-between">
+                <div className="flex flex-row">
+                    <Image
+                        src={team.logoUrl!}
+                        alt="profile image"
+                        width={50}
+                        height={50}
+                        className="rounded-full"
+                    />
+                    <div className="flex flex-col mx-2">
+                        <h1 className="text-sm font-bold">{team.name}</h1>
+                        <p className="text-xs">{team.manager}</p>
+                        <p className="text-xs">{team.outcome.getWinloss()}</p>
+                    </div>
                 </div>
+
+                <div>{team.outcome.pointsFor}</div>
+                <div>{team.outcome.pointsAgainst}</div>
             </div>
 
         </>
