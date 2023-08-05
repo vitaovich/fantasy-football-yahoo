@@ -131,35 +131,39 @@ const Index = () => {
     })
 
     return (
-        <>
-            {session && (
-                <div className="flex flex-col items-center justify-center min-h-screen space-y-24 py-4">
-
-                    <h1 className="text-4xl">Leagues</h1>
-                    <div className="border border-2 border-gray-300 p-4 rounded-md text-center">
-                        <ol>
-                            {leagues}
-                        </ol>
+            <div className="flex flex-col items-center min-h-screen space-y-24 py-4">
+                {!session && (
+                    <div className="flex flex-1 items-center justify-center">
+                        No Leagues!! Probably should sign in.
                     </div>
-                    <div className="border border-2 border-gray-300 p-4 rounded-md text-center">
-                        {selectedLeague && (
-                            <>
-                                <h2 className="border-b border-gray-300 p-4">{selectedLeague}</h2>
-                                <ol>
-                                    {teams}
-                                </ol>
-                            </>
+                )}
+                {session && (
+                    <>
+                        <h1 className="text-4xl">Leagues</h1>
+                        <div className="border border-2 border-gray-300 p-4 rounded-md text-center">
+                            <ol>
+                                {leagues}
+                            </ol>
+                        </div>
+                        <div className="border border-2 border-gray-300 p-4 rounded-md text-center">
+                            {selectedLeague && (
+                                <>
+                                    <h2 className="border-b border-gray-300 p-4">{selectedLeague}</h2>
+                                    <ol>
+                                        {teams}
+                                    </ol>
+                                </>
 
-                        )}
-                        {!selectedLeague && (
-                            <h1 className="text-red-400">Please Select a league</h1>
-                        )}
-                    </div>
+                            )}
+                            {!selectedLeague && (
+                                <h1 className="text-red-400">Please Select a league</h1>
+                            )}
+                        </div>
+                    </>
 
-                </div>
-            )}
 
-        </>
+                )}
+            </div>
     );
 }
 
