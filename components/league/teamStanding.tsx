@@ -16,17 +16,17 @@ const TeamStanding: React.FC<{ team: TeamInfo }> = (props) => {
     const team = props.team;
     return (
         <>
-            <div className="my-2 flex flex-row justify-between">
+            <div className="m-2 flex flex-row justify-between">
                 <div className="flex flex-row">
                     <Image
                         src={team.logoUrl!}
                         alt="profile image"
                         width={50}
                         height={50}
-                        className="rounded-full"
+                        className="rounded-full group-hover:animate-wiggle"
                     />
                     <div className="flex flex-col mx-2">
-                        <h1 className="text-sm font-bold">{team.name}</h1>
+                        <h1 className="text-xs font-bold">{team.name}</h1>
                         <p className="text-xs">{team.manager}</p>
                         <p className="text-xs">{team.outcome.getWinloss()}</p>
                     </div>

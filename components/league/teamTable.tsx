@@ -5,7 +5,7 @@ import TeamStanding from "./teamStanding";
 const TeamTable: React.FC<{teams: TeamInfo[]}> = (props) => {
     const teamRows = props.teams.map((team) => {
         return (
-            <tr key={team.id}>
+            <tr key={team.id} className="group hover:bg-blue-300">
                 <td>
                     <TeamStanding team={team} />
                 </td>
