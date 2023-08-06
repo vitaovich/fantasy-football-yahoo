@@ -1,0 +1,12 @@
+.animation {
+    width: 128px;
+    height: 128px;
+    background: url('/assets/IMG_0253.PNG') left center;
+    background-size: cover;
+    animation: play 2s steps(64) infinite;
+    display: inline-block;
+}
+
+@keyframes play {
+    100% { background-position: -8192px;}
+}
