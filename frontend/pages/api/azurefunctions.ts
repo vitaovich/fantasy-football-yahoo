@@ -6,7 +6,7 @@ type Data = {
     name: string
 }
 
-const azureAPIUrl = 'http://localhost:7071/api/HttpTrigger1';
+const azureAPIUrl = 'http://fantasy-football-backend:7071/api/GenerateSasUrlFunction';
 
 async function makeApiCall(req: NextApiRequest, uri: string) {
     let apiCallResult = {
@@ -17,7 +17,16 @@ async function makeApiCall(req: NextApiRequest, uri: string) {
         result: {}
     };
     try {
-        const request = await fetch(uri);
+        let body = JSON.parse(req.body);
+        body.permission = "w";
+        body.timerange = "10";
+        body.containerName = "upload"
+        console.log(body);
+
+        const request = await fetch(uri, {
+            method: "POST",
+            body: JSON.stringify(body)
+        });
         const reqText = await request.text();
         apiCallResult.success = true;
         apiCallResult.result = reqText;
@@ -35,8 +44,7 @@ export default async function handler(
     res: NextApiResponse<Data>
 ) {
     console.log("Calling Azure Functions");
-    const body = JSON.parse(req.body);
-    console.log(body);
+    // const body = JSON.parse(req.body);
     // res.status(200).json(body);
     const uri = azureAPIUrl;
     const apiCallResult = makeApiCall(req, uri);

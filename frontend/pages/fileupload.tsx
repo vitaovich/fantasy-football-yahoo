@@ -11,9 +11,14 @@ const FileUpload = () => {
     };
 
     async function onSasTokenHandler(name: string) {
+        if(!file) {
+            setResult("Must specify a file first.");
+            return
+        }
+        
         const res = await fetch('/api/azurefunctions', {
             method: "POST",
-            body: JSON.stringify({ name: name })
+            body: JSON.stringify({ name: name, fileName: file.name })
         })
         const fantasySportsResult = await res.json();
         setResult(JSON.stringify(fantasySportsResult, null, 2));
