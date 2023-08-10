@@ -6,7 +6,7 @@
 	"dockerComposeFile": ["../../docker-compose.yml"],
 	"service": "fantasy-football-frontend",
 	"workspaceFolder": "/workspace/frontend",
-	// "dockerFile": "Dockerfile",
+	"shutdownAction": "none",
 
 	"features": {
 		"ghcr.io/devcontainers/features/azure-cli:1": {
