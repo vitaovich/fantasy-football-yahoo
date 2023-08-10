@@ -1,9 +1,13 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
-	"name": "Ubuntu",
+	"name": "Fantasy Football Frontend",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/base:jammy",
+	"dockerComposeFile": ["../../docker-compose.yml"],
+	"service": "fantasy-football-frontend",
+	"workspaceFolder": "/workspace/frontend",
+	// "dockerFile": "Dockerfile",
+
 	"features": {
 		"ghcr.io/devcontainers/features/azure-cli:1": {
 			"installUsingPython": true,

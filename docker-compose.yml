@@ -1,0 +1,19 @@
+version: '3'
+services:
+  fantasy-football-frontend:
+    image: mcr.microsoft.com/devcontainers/base:jammy
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    links:
+      - fantasy-football-backend
+    # ...
+
+  fantasy-football-backend:
+    image: mcr.microsoft.com/azure-functions/dotnet-isolated:4-dotnet-isolated6.0-core-tools
+    volumes:
+      # Mount the root folder that contains .git
+      - .:/workspace:cached
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    # ...
