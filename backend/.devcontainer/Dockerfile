@@ -1,6 +1,8 @@
 FROM mcr.microsoft.com/azure-functions/dotnet-isolated:4-dotnet-isolated6.0-core-tools
 RUN apt-get update && sudo apt-get install -y gnupg software-properties-common
 
+RUN dotnet restore
+
 ################################
 # Install Terraform (https://developer.hashicorp.com/terraform/tutorials/docker-get-started/install-cli)
 ################################
