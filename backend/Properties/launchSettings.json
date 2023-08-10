@@ -2,7 +2,7 @@
   "profiles": {
     "backend": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7090",
+      "commandLineArgs": "--port 7274",
       "launchBrowser": false
     }
   }
