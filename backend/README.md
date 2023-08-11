@@ -25,6 +25,9 @@ sudo apt-get install jq
 
 ## [Azure Functions triggers and bindings concepts](https://learn.microsoft.com/en-us/azure/azure-functions/functions-triggers-bindings?tabs=csharp#supported-bindings)
 
+## Terraform
+- [Manage Azure Cosmos DB for NoSQL resources with terraform](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/manage-with-terraform)
+
 ## Uploading to Azure Blob Storage
 - [Upload an image to an Azure Storage blob with JavaScript](https://learn.microsoft.com/en-us/azure/developer/javascript/tutorial/browser-file-upload-azure-storage-blob?tabs=github-codespaces)
 
