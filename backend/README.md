@@ -14,6 +14,15 @@ Install with
 sudo apt-get install jq
 ```
 
+Test a url with query using curl
+```bash
+curl --get \
+    --data-urlencode "id=30eadf76-f61c-4c1e-84fd-f238fb0c3b39" \
+    --data-urlencode "partitionKey=81e06401-4d8f-4f8d-a751-4e313bf23775" \
+    http://localhost:7071/api/httptrigcosmosdbget
+    
+```
+
 
 ## [Using Images, Dockerfiles, and Docker Compose](https://containers.dev/guide/dockerfile)
 
@@ -36,3 +45,4 @@ sudo apt-get install jq
 - [Create a service SAS for a blob](https://learn.microsoft.com/en-us/azure/storage/blobs/sas-service-create-dotnet#create-a-service-sas-for-a-blob)
 
 - [Azure Storage Blob client library for JavaScript](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/storage/storage-blob#with-sas-token)
+
