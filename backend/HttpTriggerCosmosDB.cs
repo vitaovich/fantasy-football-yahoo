@@ -54,7 +54,7 @@ namespace My.CosmosDBFunction
 
     public class MultiResponse
     {
-        [CosmosDBOutput("cosmos-db-free-tier-vervet-cosmosdb-sqldb", "cosmos-db-free-tier-vervet-sql-container",
+        [CosmosDBOutput("cosmos-db-free-tier-grubworm-cosmosdb-sqldb", "cosmos-db-free-tier-grubworm-sql-container",
             Connection = "COSMOS_ENDPOINT", CreateIfNotExists = true)]
         public MyDocument Document { get; set; }
         public HttpResponseData HttpResponse { get; set; }
