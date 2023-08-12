@@ -1,5 +1,5 @@
 # Backend
-
+Using [Azure functions Isolated process](https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-process-guide)
 
 
 # Learnings
@@ -46,3 +46,9 @@ curl --get \
 
 - [Azure Storage Blob client library for JavaScript](https://github.com/Azure/azure-sdk-for-js/tree/main/sdk/storage/storage-blob#with-sas-token)
 
+## Cosmos DB
+- [Azure Cosmos DB input binding for Azure Functions 2.x and higher](https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-cosmosdb-v2-input?tabs=python-v2%2Cin-process%2Cextensionv4&pivots=programming-language-csharp)
+- [Data modeling in Azure Cosmos DB](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/modeling-data)
+- [Connect Azure Functions to Azure Cosmos DB using Visual Studio Code](https://learn.microsoft.com/en-us/azure/azure-functions/functions-add-output-binding-cosmos-db-vs-code?tabs=in-process%2Cv1&pivots=programming-language-csharp)
+- [Partitioning and horizontal scaling in Azure Cosmos DB](https://learn.microsoft.com/en-us/azure/cosmos-db/partitioning-overview)
+- [Exercise - Read and query items](https://learn.microsoft.com/en-us/training/modules/build-dotnet-app-azure-cosmos-db-nosql/6-exercise-read-query?tabs=run-app)
