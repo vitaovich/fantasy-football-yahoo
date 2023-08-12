@@ -19,8 +19,8 @@ namespace My.Function
         public HttpResponseData Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
             [CosmosDBInput(
-                databaseName: "cosmos-db-free-tier-grubworm-cosmosdb-sqldb",
-                containerName: "cosmos-db-free-tier-grubworm-sql-container",
+                databaseName: "vitaovich-cosmosdb-sqldb",
+                containerName: "vitaovich-sql-container",
                 Connection = "COSMOS_ENDPOINT",
                 Id = "{Query.id}",
                 PartitionKey = "{Query.partitionKey}")]MyDocument toDoItem
