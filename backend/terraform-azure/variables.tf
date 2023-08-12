@@ -3,7 +3,7 @@ variable "resource_group_name" {
 }
 
 variable "my_principal_id" {
-  default = ""
+  default = "b57b8480-78cd-4a24-bb01-c9ec1ff4d5e2"
 }
 
 variable "storage_account_name" {
