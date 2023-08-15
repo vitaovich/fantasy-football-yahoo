@@ -1,4 +1,5 @@
 using System.Net;
+using FantasyFootbal.Models;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
@@ -20,7 +21,7 @@ namespace My.CosmosDBFunction
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
             string guid = System.Guid.NewGuid().ToString();
-            string defGuid = System.Guid.NewGuid().ToString();
+            string defGuid = "yahoo-" + System.Guid.NewGuid().ToString();
             _logger.LogInformation($"GUID Generated:{guid}");
 
             string name = req.Query["name"];
@@ -37,14 +38,15 @@ namespace My.CosmosDBFunction
             // Return a response to both HTTP trigger and Azure Cosmos DB output binding.
             return new MultiResponse()
             {
-                Document = new MyDocument
+                LeagueDocument = new LeagueDocument
                 {
                     id = guid,
-                    definition = new Definition
+                    League = new League
                     {
                         id = defGuid,
                         name = name,
-                        message = message
+                        message = message,
+                        Teams = new()
                     }
                 },
                 HttpResponse = response
@@ -54,21 +56,9 @@ namespace My.CosmosDBFunction
 
     public class MultiResponse
     {
-        [CosmosDBOutput("vitaovich-cosmosdb-sqldb", "vitaovich-sql-container",
+        [CosmosDBOutput("vitaovich-cosmosdb-sqldb", "fantasyfootball-sql-container",
             Connection = "COSMOS_ENDPOINT", CreateIfNotExists = true)]
-        public MyDocument Document { get; set; }
+        public LeagueDocument LeagueDocument { get; set; }
         public HttpResponseData HttpResponse { get; set; }
-    }
-    public class MyDocument
-    {
-        public string id { get; set; }
-        public Definition definition { get; set; }
-    }
-    
-    public class Definition
-    {
-        public string id { get; set; }
-        public string name { get; set; }
-        public string message { get; set; }
     }
 }
