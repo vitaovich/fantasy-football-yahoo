@@ -67,7 +67,7 @@ resource "azurerm_cosmosdb_sql_container" "my_sql_container" {
   resource_group_name   = azurerm_resource_group.rg.name
   account_name          = azurerm_cosmosdb_account.my_cosmos.name
   database_name         = azurerm_cosmosdb_sql_database.main.name
-  partition_key_path    = "/League/id"
+  partition_key_path    = "/League/Year"
   partition_key_version = 1
   throughput            = var.throughput
 
@@ -87,9 +87,9 @@ resource "azurerm_cosmosdb_sql_container" "my_sql_container" {
     }
   }
 
-  unique_key {
-    paths = ["/League/idlong", "/League/idshort"]
-  }
+  # unique_key {
+  #   paths = ["/League/Yearlong", "/League/Yearshort"]
+  # }
 }
 
 ################################
