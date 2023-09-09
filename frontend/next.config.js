@@ -12,6 +12,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "yahoofantasysports-res.cloudinary.com"
+      },
+      {
+        protocol: "https",
+        hostname: "ffvitaovich.blob.core.windows.net"
       }
     ]
   }
