@@ -122,6 +122,11 @@ resource "azurerm_storage_container" "my_storage_container" {
   container_access_type = "blob"
 }
 
+resource "azurerm_storage_queue" "my_storage_queue" {
+  name                 = "uploadqueue"
+  storage_account_name = azurerm_storage_account.my_storage_account.name
+}
+
 # Adds my own account to 
 resource "azurerm_role_assignment" "data-contributor-role" {
   scope                = azurerm_storage_container.my_storage_container.resource_manager_id
