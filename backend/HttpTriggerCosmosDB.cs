@@ -1,5 +1,5 @@
 using System.Net;
-using FantasyFootbal.Models;
+using FantasyFootball.Models;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
@@ -20,9 +20,9 @@ namespace My.CosmosDBFunction
         public MultiResponse Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
-            string guid = System.Guid.NewGuid().ToString();
+            // string guid = System.Guid.NewGuid().ToString();
             string defGuid = "yahoo-" + System.Guid.NewGuid().ToString();
-            _logger.LogInformation($"GUID Generated:{guid}");
+            _logger.LogInformation($"GUID Generated:{defGuid}");
 
             string name = req.Query["name"];
             string requestBody = new StreamReader(req.Body).ReadToEnd();
@@ -40,14 +40,16 @@ namespace My.CosmosDBFunction
             {
                 LeagueDocument = new LeagueDocument
                 {
-                    id = guid,
+                    id = defGuid,
                     League = new League
                     {
-                        id = defGuid,
+                        LeagueType = LeagueType.Yahoo,
+                        Year = "2024",
                         name = name,
                         message = message,
                         Teams = new()
                     }
+
                 },
                 HttpResponse = response
             };
@@ -57,7 +59,7 @@ namespace My.CosmosDBFunction
     public class MultiResponse
     {
         [CosmosDBOutput("vitaovich-cosmosdb-sqldb", "fantasyfootball-sql-container",
-            Connection = "COSMOS_ENDPOINT", CreateIfNotExists = true)]
+            ConnectionStringSetting = "COSMOS_ENDPOINT", CreateIfNotExists = true)]
         public LeagueDocument LeagueDocument { get; set; }
         public HttpResponseData HttpResponse { get; set; }
     }
