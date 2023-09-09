@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { BlockBlobClient } from '@azure/storage-blob';
 import { convertFileToArrayBuffer } from '@/lib/convert-file-to-arraybuffer';
+import Image from 'next/image'
 
 const FileUpload = () => {
     const [file, setFile] = useState<any>();
     const [result, setResult] = useState<string>();
     const [sasURL, setSasURL] = useState<string>('');
+    const [storageURL, setStorageURL] = useState<string>('');
+    const [uploadStatus, setUploadStatus] = useState<string>('');
 
     const onFileChange = (event: any) => {
         // Update the state
@@ -21,7 +24,7 @@ const FileUpload = () => {
 
         const res = await fetch('/api/azurefunctions', {
             method: "POST",
-            body: JSON.stringify({ name: name, fileName: file.name })
+            body: JSON.stringify({ name: name, fileName: file.name, fileType: file.name.split('.').pop() })
         })
         const fantasySportsResult = await res.json();
         setSasURL(fantasySportsResult.result);
@@ -44,6 +47,20 @@ const FileUpload = () => {
                 const blockBlobClient = new BlockBlobClient(sasURL);
                 return blockBlobClient.uploadData(fileArrayBuffer);
             })
+            .then(() => {
+                setUploadStatus('Successfully finished upload');
+                setStorageURL("https://ffvitaovich.blob.core.windows.net/upload/" + file.name);
+            })
+            .catch((error: unknown) => {
+                if (error instanceof Error) {
+                  const { message, stack } = error;
+                  setUploadStatus(
+                    `Failed to finish upload with error : ${message} ${stack || ''}`
+                  );
+                } else {
+                  setUploadStatus(error as string);
+                }
+              });
     };
 
     return (
@@ -69,6 +86,20 @@ const FileUpload = () => {
                 <button className="bg-green-500 py-2 px-4 rounded-full text-white" onClick={onFileUpload}>
                     Upload!
                 </button>
+                {uploadStatus && (
+                    <p>{uploadStatus}</p>
+                )}
+                { storageURL &&
+                    <Image
+                    src={storageURL}
+                    width={500}
+                    height={500}
+                    alt=""
+                    >
+                    </Image>
+                }
+                
+                    
             </div>
         </>
     );
