@@ -123,6 +123,7 @@ const Index = () => {
     const [yahooLeagues, setYahooLeagues] = useState<any[]>([]);
     const [selectedLeague, setSelectedLeague] = useState<string | undefined>();
     const [selectedLeagueTeams, setSelectedLeagueTeams] = useState<TeamInfo[]>([]);
+    const [createResult, setCreateResult] = useState<string>('No result.');
 
     useEffect(() => {
         fetchYahooLeagues();
@@ -135,11 +136,13 @@ const Index = () => {
         })
         const fantasySportsResult = await res.json();
         const receivedLeagues = TransformYahooLeaguesContent(fantasySportsResult.result.fantasy_content);
+        console.log(receivedLeagues);
         setYahooLeagues(receivedLeagues);
         // setYahooLeagues(LEAGUE_DATA);
     }
 
     async function handleLeagueSelect(nextLeague: any) {
+        console.log("nextleagueselected",nextLeague);
         const res = await fetch('/api/yahoofantasysports', {
             method: "POST",
             body: JSON.stringify({ call: `league/${nextLeague.league_key}/standings` })
@@ -151,6 +154,14 @@ const Index = () => {
 
         setSelectedLeague(nextLeague.name);
         // setSelectedLeagueTeams(TEAMS_DATA);
+
+        const urlLeagueGet = '/api/league/get?' + new URLSearchParams({league_key: nextLeague.league_key, season: nextLeague.season});
+        // console.log("GET MY LEAGUE DATA", urlLeagueGet);
+        const myRes = await fetch(urlLeagueGet, {
+            method: "GET"
+        })
+        const result = await myRes.json();
+        console.log(JSON.stringify(result));
     }
 
     const leagues = yahooLeagues.map((leagueData: any) => {
@@ -174,6 +185,16 @@ const Index = () => {
         );
     });
 
+    async function handleLeagueCreate(nextLeague: any) {
+        const res = await fetch('/api/league/create', {
+            method: "POST",
+            body: JSON.stringify({ name: `hello world` })
+        })
+        const createResult = await res.json();
+        console.log(JSON.stringify(createResult));
+        setCreateResult(JSON.stringify(createResult));
+    }
+
     return (
         <div className="flex flex-col py-4">
             {!session && (
@@ -189,6 +210,14 @@ const Index = () => {
                             {leagues}
                         </ol>
                     </Container>
+                    {selectedLeague && (
+                        <Container title={"League Type"}>
+                            <button onClick={handleLeagueCreate}>Click me</button>
+                            <p>
+                                {createResult}
+                            </p>
+                        </Container>
+                    )}
                     {selectedLeague && (
                         <Container title={selectedLeague}>
                             <TeamTable teams={selectedLeagueTeams} />
