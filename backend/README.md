@@ -14,13 +14,24 @@ Install with
 sudo apt-get install jq
 ```
 
+URL encode a value with jq
+```bash
+value="my value"
+printf %s "$value" | jq -s -R -r @uri
+```
+
 Test a url with query using curl
 ```bash
+# curl GET Example
 curl --get \
     --data-urlencode "id=30eadf76-f61c-4c1e-84fd-f238fb0c3b39" \
     --data-urlencode "partitionKey=81e06401-4d8f-4f8d-a751-4e313bf23775" \
     http://localhost:7071/api/httptrigcosmosdbget
-    
+
+# curl POST Example
+curl -X POST "http://localhost:7071/api/leagues/2023/yahoo-829d5a7f-2825-4159-bf8e-3762cae234e7" \
+     -H "Content-Type: application/json" \
+     -d '{ "name": "test" }'
 ```
 
 
