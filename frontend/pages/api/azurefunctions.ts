@@ -6,7 +6,7 @@ type Data = {
     name: string
 }
 
-const azureAPIUrl = 'http://fantasy-football-backend:7071/api/GenerateSasUrlFunction';
+const azureAPIUrl = 'http://fantasy-football-backend:7071/api/leagues/upload';
 
 async function makeApiCall(req: NextApiRequest, uri: string) {
     let apiCallResult = {
@@ -18,6 +18,7 @@ async function makeApiCall(req: NextApiRequest, uri: string) {
     };
     try {
         let body = JSON.parse(req.body);
+        console.log(body);
         body.permission = "w";
         body.timerange = "10";
         body.containerName = "upload"
