@@ -122,17 +122,29 @@ resource "azurerm_storage_container" "my_storage_container" {
   container_access_type = "blob"
 }
 
-resource "azurerm_storage_queue" "my_storage_queue" {
-  name                 = "uploadqueue"
-  storage_account_name = azurerm_storage_account.my_storage_account.name
-}
-
 # Adds my own account to 
 resource "azurerm_role_assignment" "data-contributor-role" {
   scope                = azurerm_storage_container.my_storage_container.resource_manager_id
   role_definition_name = "Storage Blob Data Contributor"
   principal_id         = var.my_principal_id
 }
+
+# resource "azurerm_eventgrid_system_topic" "uploadsub_st" {
+#   name                   = "imagestoragesystopic"
+#   location               = var.location
+#   resource_group_name    = azurerm_resource_group.rg.name
+#   source_arm_resource_id = azurerm_storage_account.my_storage_account.id
+#   topic_type             = "Microsoft.Storage.StorageAccounts"
+# }
+
+# resource "azurerm_eventgrid_system_topic_event_subscription" "example" {
+#   name                = "upload-sub"
+#   system_topic        = azurerm_eventgrid_system_topic.uploadsub_st.name
+#   resource_group_name = azurerm_resource_group.rg.name
+#   included_event_types = [
+#     "Microsoft.Storage.BlobCreated"
+#   ]
+# }
 
 # resource "random_pet" "prefix" {
 #   prefix = var.prefix
