@@ -29,7 +29,6 @@ terraform output -json | jq " \
     COSMOS_KEY: .COSMOS_KEY.value \
   } \
 }"
-
 ```
 
 ## Delete Service Principal
@@ -39,3 +38,10 @@ az ad sp list --display-name $service_principal_name --query "[0].id" -o tsv
 az ad sp delete --id $(az ad sp list --display-name $service_principal_name --query "[0].id" -o tsv)
 ```
 
+
+curl -X POST "http://localhost:7071/api/leagues/create" \
+     -H "Content-Type: application/json" \
+     -d '{ "id": "test", "partitionKey": "2023" }'
+
+curl --get \
+    http://localhost:7071/api/leagues/get/2023/test
