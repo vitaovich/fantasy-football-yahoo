@@ -7,6 +7,9 @@ import TeamInfo from "@/components/league/teamInfo";
 import TeamOutcome from "@/components/league/teamOutcome";
 import TeamStanding from "@/components/league/teamStanding";
 import TeamTable from "@/components/league/teamTable";
+import CustomLeague from "@/components/league/customLeague";
+import LeagueType from "@/components/league/LeagueType";
+import CustomLeagueTags from "@/components/league/customLeagueTags";
 
 const LEAGUE_DATA = [
     {
@@ -123,6 +126,8 @@ const Index = () => {
     const [yahooLeagues, setYahooLeagues] = useState<any[]>([]);
     const [selectedLeague, setSelectedLeague] = useState<string | undefined>();
     const [selectedLeagueTeams, setSelectedLeagueTeams] = useState<TeamInfo[]>([]);
+    const [customLeague, setCustomLeague] = useState<CustomLeague | undefined>();
+
 
     useEffect(() => {
         fetchYahooLeagues();
@@ -151,6 +156,13 @@ const Index = () => {
 
         setSelectedLeague(nextLeague.name);
         // setSelectedLeagueTeams(TEAMS_DATA);
+
+        setCustomLeague(new CustomLeague(LeagueType.Regular));
+    }
+
+    const createCustomLeague = async () => {
+        const newCustomLeague = new CustomLeague(LeagueType.Tattoo);
+        setCustomLeague(newCustomLeague);
     }
 
     const leagues = yahooLeagues.map((leagueData: any) => {
@@ -190,7 +202,7 @@ const Index = () => {
                         </ol>
                     </Container>
                     {selectedLeague && (
-                        <Container title={selectedLeague}>
+                        <Container title={selectedLeague} headerTags={<CustomLeagueTags customLeague={customLeague} onTagClick={createCustomLeague}/>}>
                             <TeamTable teams={selectedLeagueTeams} />
                         </Container>
                     )}
