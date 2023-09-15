@@ -45,6 +45,10 @@ curl -X POST "http://localhost:7071/api/leagues/2023/yahoo-829d5a7f-2825-4159-bf
 
 ## [Azure Functions triggers and bindings concepts](https://learn.microsoft.com/en-us/azure/azure-functions/functions-triggers-bindings?tabs=csharp#supported-bindings)
 
+## [Azure Functions Blob Event Trigger]()
+
+## [ngrok](https://ngrok.com/docs/getting-started/)
+
 ## Terraform
 - [Manage Azure Cosmos DB for NoSQL resources with terraform](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/manage-with-terraform)
 

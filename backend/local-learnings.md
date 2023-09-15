@@ -43,5 +43,15 @@ curl -X POST "http://localhost:7071/api/leagues/create" \
      -H "Content-Type: application/json" \
      -d '{ "id": "test", "partitionKey": "2023" }'
 
+curl -X POST "http://localhost:7071/api/leagues/teamimage/2023/test" \
+     -H "Content-Type: application/json" \
+     -d '{ "id": "test", "partitionKey": "2023" }'
+
 curl --get \
-    http://localhost:7071/api/leagues/get/2023/test
+    http://localhost:7071/api/leagues/get/2023/test3
+
+
+http://localhost:7071/runtime/webhooks/blobs?functionName=Host.Functions.BlobTriggerEventGrid
+https://1dd1-50-47-225-220.ngrok.io/runtime/webhooks/blobs?functionName=Host.Functions.BlobTriggerEventGrid
+
+https://1dd1-50-47-225-220.ngrok.io/api/HttpTrigger1

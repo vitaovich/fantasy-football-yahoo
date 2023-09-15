@@ -42,3 +42,9 @@ variable "throughput" {
     error_message = "Cosmos db throughput should be in increments of 100."
   }
 }
+
+variable "dev_ngrok_webhook" {
+  type        = string
+  default     = "https://d81c-50-47-225-220.ngrok.io"
+  description = "ngrok dev url for azure functions"
+}

@@ -1,8 +1,7 @@
 # IMAGE LINK: https://hub.docker.com/_/microsoft-azure-functions-dotnet-isolated
 FROM mcr.microsoft.com/azure-functions/dotnet-isolated:4-dotnet-isolated6.0-core-tools
-RUN apt-get update && sudo apt-get install -y gnupg software-properties-common
+RUN apt-get update && sudo apt-get install -y gnupg software-properties-common jq
 
-RUN dotnet restore
 
 ################################
 # Install Terraform (https://developer.hashicorp.com/terraform/tutorials/docker-get-started/install-cli)
@@ -31,3 +30,8 @@ RUN apt update
 
 # Install Terraform from the new repository.
 RUN apt-get install terraform
+
+RUN curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
+
+# WORKDIR "backend"
+# RUN dotnet restore

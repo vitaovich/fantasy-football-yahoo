@@ -129,22 +129,48 @@ resource "azurerm_role_assignment" "data-contributor-role" {
   principal_id         = var.my_principal_id
 }
 
-# resource "azurerm_eventgrid_system_topic" "uploadsub_st" {
-#   name                   = "imagestoragesystopic"
-#   location               = var.location
-#   resource_group_name    = azurerm_resource_group.rg.name
-#   source_arm_resource_id = azurerm_storage_account.my_storage_account.id
-#   topic_type             = "Microsoft.Storage.StorageAccounts"
-# }
+resource "azurerm_service_plan" "example" {
+  name                = "example-app-service-plan"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.location
+  os_type             = "Windows"
+  sku_name            = "Y1"
+}
 
-# resource "azurerm_eventgrid_system_topic_event_subscription" "example" {
-#   name                = "upload-sub"
-#   system_topic        = azurerm_eventgrid_system_topic.uploadsub_st.name
-#   resource_group_name = azurerm_resource_group.rg.name
-#   included_event_types = [
-#     "Microsoft.Storage.BlobCreated"
-#   ]
-# }
+resource "azurerm_windows_function_app" "example" {
+  name                = "vio-windows-function-app"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.location
+
+  storage_account_name       = azurerm_storage_account.my_storage_account.name
+  storage_account_access_key = azurerm_storage_account.my_storage_account.primary_access_key
+  service_plan_id            = azurerm_service_plan.example.id
+  depends_on = [
+    azurerm_storage_account.my_storage_account
+  ]
+  site_config {}
+}
+
+resource "azurerm_eventgrid_system_topic" "uploadsub_st" {
+  name                   = "imagestoragesystopic"
+  location               = var.location
+  resource_group_name    = azurerm_resource_group.rg.name
+  source_arm_resource_id = azurerm_storage_account.my_storage_account.id
+  topic_type             = "Microsoft.Storage.StorageAccounts"
+}
+
+resource "azurerm_eventgrid_system_topic_event_subscription" "example" {
+  name                = "upload-sub"
+  system_topic        = azurerm_eventgrid_system_topic.uploadsub_st.name
+  resource_group_name = azurerm_resource_group.rg.name
+  included_event_types = [
+    "Microsoft.Storage.BlobCreated"
+  ]
+
+  webhook_endpoint {
+    url = "${var.dev_ngrok_webhook}/runtime/webhooks/blobs?functionName=Host.Functions.BlobTriggerEventGrid"
+  }
+}
 
 # resource "random_pet" "prefix" {
 #   prefix = var.prefix
