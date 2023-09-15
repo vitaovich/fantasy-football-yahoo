@@ -6,7 +6,17 @@
 	"dockerComposeFile": ["../../docker-compose.yml"],
 	"service": "fantasy-football-frontend",
 	"workspaceFolder": "/workspace/frontend",
-	// "dockerFile": "Dockerfile",
+	"shutdownAction": "none",
+
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+		  // Add the IDs of extensions you want installed when the container is created.
+		  "extensions": [
+			"hashicorp.terraform"
+		  ]
+		}
+	  },
 
 	"features": {
 		"ghcr.io/devcontainers/features/azure-cli:1": {

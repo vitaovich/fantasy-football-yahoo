@@ -11,7 +11,10 @@ services:
     # ...
 
   fantasy-football-backend:
-    image: mcr.microsoft.com/azure-functions/dotnet-isolated:4-dotnet-isolated6.0-core-tools
+    build:
+      context: ./backend/.devcontainer
+      dockerfile: Dockerfile
+    # image: mcr.microsoft.com/azure-functions/dotnet-isolated:4-dotnet-isolated6.0-core-tools
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
