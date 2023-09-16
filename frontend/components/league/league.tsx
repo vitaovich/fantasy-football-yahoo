@@ -9,6 +9,7 @@ import TeamOutcome from "./teamOutcome";
 
 const League: React.FC<{ leagueKey: string | undefined, leagueName: string | undefined }> = (props) => {
     const [selectedLeagueTeams, setSelectedLeagueTeams] = useState<TeamInfo[]>([]);
+    const [customLeague, setCustomLeague] = useState<CustomLeague | undefined>();
 
     useEffect(() => {
         if (props.leagueKey) {
@@ -27,19 +28,20 @@ const League: React.FC<{ leagueKey: string | undefined, leagueName: string | und
         const nextLeague = TransformYahooTeamsContent(fantasySportsResult.result.fantasy_content);
         console.log(JSON.stringify(nextLeague, null, 2));
         setSelectedLeagueTeams(nextLeague);
+        setCustomLeague(new CustomLeague(LeagueType.Regular))
     }
 
-    const [customLeague, setCustomLeague] = useState<CustomLeague | undefined>(new CustomLeague(LeagueType.Regular));
 
-    const createCustomLeague = async () => {
+    const createCustomLeague = async (nextLeague: CustomLeague) => {
         const newCustomLeague = new CustomLeague(LeagueType.Tattoo);
+        console.log("Make api call to update league settings.")
         setCustomLeague(newCustomLeague);
     }
 
     return (
         <>
             {props.leagueName && (
-                <Container title={props.leagueName} headerTags={<CustomLeagueTags customLeague={customLeague} onTagClick={createCustomLeague} />}>
+                <Container title={props.leagueName} headerTags={<CustomLeagueTags customLeague={customLeague} onUpdateLeague={createCustomLeague} />}>
                     <TeamTable teams={selectedLeagueTeams} />
                 </Container>
             )}

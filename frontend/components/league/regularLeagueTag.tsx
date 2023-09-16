@@ -2,9 +2,10 @@ import { useState } from "react";
 import Modal from "../utils/modal";
 import LeagueType from "./LeagueType";
 import useSelect from "@/hooks/use-select";
+import CustomLeague from "./customLeague";
 
 
-const RegularLeagueTag: React.FC<{ onTagClick: () => void }> = (props) => {
+const RegularLeagueTag: React.FC<{ onUpdateLeague: (nextLeague: CustomLeague) => void }> = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const {
@@ -15,7 +16,7 @@ const RegularLeagueTag: React.FC<{ onTagClick: () => void }> = (props) => {
         inputBlurHandler: leagueTypeBlurHandler,
         reset: resetLeagueTypeInput
     }
-        = useSelect("Regular", value => value.trim() !== '');
+        = useSelect(LeagueType.Regular, value => value.trim() !== '');
 
     let formIsValid = false;
 
@@ -30,7 +31,8 @@ const RegularLeagueTag: React.FC<{ onTagClick: () => void }> = (props) => {
             return
         }
         setIsModalOpen(false);
-        console.log("Submit league type to api call.")
+
+        props.onUpdateLeague(new CustomLeague(enteredLeagueType as LeagueType))
     }
 
     const openModal = () => {
@@ -47,12 +49,14 @@ const RegularLeagueTag: React.FC<{ onTagClick: () => void }> = (props) => {
         value={enteredLeagueType}
         onChange={leagueTypeChangedHandler}
     >
-        <option value={"Regular"}>Regular</option>
-        <option value={"Tattoo"}>Tattoo</option>
-        <option value={"Losers"}>Losers</option>
+        {Object.keys(LeagueType).map((key) => (
+            <option key={key} value={key as LeagueType}>
+                {key}
+            </option>
+        ))
+
+        }
     </select>
-
-
 
     return (
         <>

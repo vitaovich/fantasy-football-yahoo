@@ -1,6 +1,7 @@
 enum LeagueType {
-    Regular,
-    Tattoo
+    Regular = "regular",
+    Tattoo = "tattoo",
+    Error = "error"
 }
 
- export default LeagueType;
+export default LeagueType;

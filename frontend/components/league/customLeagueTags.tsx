@@ -3,7 +3,7 @@ import CustomLeague from './customLeague';
 import LeagueType from './LeagueType';
 import RegularLeagueTag from './regularLeagueTag';
 
-const CustomLeagueTags: React.FC<{ customLeague: CustomLeague | undefined, onTagClick: () => void  }> = (props) => {
+const CustomLeagueTags: React.FC<{ customLeague: CustomLeague | undefined, onUpdateLeague: (customLeague: CustomLeague) => void  }> = (props) => {
     const customLeague = props.customLeague;
 
     const leagueTag = GetLeagueTag(customLeague)
@@ -15,7 +15,7 @@ const CustomLeagueTags: React.FC<{ customLeague: CustomLeague | undefined, onTag
                 return <p className='bg-blue-400 px-4 rounded-full text-white'>{customLeague.LeagueTypeName}</p>
             }
             case(LeagueType.Regular): {
-                return <RegularLeagueTag onTagClick={props.onTagClick}></RegularLeagueTag>
+                return <RegularLeagueTag onUpdateLeague={props.onUpdateLeague}></RegularLeagueTag>
             }
             default:
                 return <p>error</p>
