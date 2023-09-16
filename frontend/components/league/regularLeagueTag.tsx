@@ -30,8 +30,6 @@ const RegularLeagueTag: React.FC<{ onUpdateLeague: (nextLeague: CustomLeague) =>
             // props.formValidHandler(false)
             return
         }
-        setIsModalOpen(false);
-
         props.onUpdateLeague(new CustomLeague(enteredLeagueType as LeagueType))
     }
 

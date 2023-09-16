@@ -42,7 +42,7 @@ const League: React.FC<{ leagueKey: string | undefined, leagueName: string | und
         <>
             {props.leagueName && (
                 <Container title={props.leagueName} headerTags={<CustomLeagueTags customLeague={customLeague} onUpdateLeague={createCustomLeague} />}>
-                    <TeamTable teams={selectedLeagueTeams} />
+                    <TeamTable teams={selectedLeagueTeams} customLeague={customLeague} />
                 </Container>
             )}
             {!props.leagueName && (
