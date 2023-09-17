@@ -1,11 +1,16 @@
 import CustomLeague from "./customLeague";
+import UploadImage from "./uploadImage";
 
-const CustomLeagueContainer: React.FC<{ customLeague: CustomLeague | undefined }>  = (props) => {
+const CustomLeagueContainer: React.FC<{ customLeague: CustomLeague | undefined }> = (props) => {
+    const customLeagueTitle = props.customLeague?.LeagueTypeName + " League"
+
+
     return (
         <>
-        <div>
-            {props.customLeague?.LeagueTypeName}
-        </div>
+            <div>
+                <h1>{customLeagueTitle}</h1>
+                <UploadImage></UploadImage>
+            </div>
         </>
     )
 }
