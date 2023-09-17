@@ -10,7 +10,7 @@ const Team: React.FC<{ team: TeamInfo, customLeague: CustomLeague | undefined }>
             <div className="flex flex-col">
                 <div>
                     {"Team key:" + props.team.key}
-                    <CustomLeagueContainer customLeague={props.customLeague} />
+                    <CustomLeagueContainer teamKey={props.team.key} customLeague={props.customLeague} />
                 </div>
             </div>
         </>
