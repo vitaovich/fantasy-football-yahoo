@@ -13,7 +13,7 @@ const TattooLeague: React.FC<{ teamKey: string, customLeague: CustomLeague | und
     }
 
     const handleFileUpload = (file: File) => {
-        console.log("Upload file.", file.name)
+        console.log("Make api call to update team tattoo picture.", file.name)
         setFileURL(file.name)
     }
 

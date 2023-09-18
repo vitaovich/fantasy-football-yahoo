@@ -26,7 +26,7 @@ const League: React.FC<{ leagueKey: string | undefined, leagueName: string | und
         })
         const fantasySportsResult = await res.json();
         const nextLeague = TransformYahooTeamsContent(fantasySportsResult.result.fantasy_content);
-        console.log(JSON.stringify(nextLeague, null, 2));
+        // console.log(JSON.stringify(nextLeague, null, 2));
         setSelectedLeagueTeams(nextLeague);
         setCustomLeague(new CustomLeague(LeagueType.Regular))
     }
