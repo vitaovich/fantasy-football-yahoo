@@ -31,7 +31,6 @@ const League: React.FC<{ leagueKey: string | undefined, leagueName: string | und
         setCustomLeague(new CustomLeague(LeagueType.Regular))
     }
 
-
     const createCustomLeague = async (nextLeague: CustomLeague) => {
         const newCustomLeague = new CustomLeague(LeagueType.Tattoo);
         console.log("Make api call to update league settings.")
