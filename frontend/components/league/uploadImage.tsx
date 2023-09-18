@@ -1,7 +1,7 @@
 import React, { DragEventHandler, useState } from "react"
 import Image from 'next/image'
 
-const UploadImage: React.FC<{onFileUpload: (file:File) => void}> = (props) => {
+const UploadImage: React.FC<{onCancelUpload: () => void,onFileUpload: (file:File) => void}> = (props) => {
     const [file, setFile] = useState<File>();
     const [fileURL, setFileURL] = useState<string>("");
 
@@ -45,6 +45,7 @@ const UploadImage: React.FC<{onFileUpload: (file:File) => void}> = (props) => {
             return
         }
         props.onFileUpload(file)
+        props.onCancelUpload()
     }
 
     return (
@@ -82,8 +83,8 @@ const UploadImage: React.FC<{onFileUpload: (file:File) => void}> = (props) => {
                 </label>
             </div>
             <div className="flex flex-row justify-between md:justify-end items-center my-2 p-2 space-x-2 bg-white rounded-md">
-                <button className="bg-red-400 px-2 rounded-full text-white">Cancel</button>
-                <button onClick={handleFileUpload} className="bg-green-400 px-2 rounded-full text-white">Upload</button>
+                <button onClick={props.onCancelUpload} className="bg-red-400 px-2 rounded-full text-white">Cancel</button>
+                <button onClick={handleFileUpload} className="bg-green-400 px-2 rounded-full text-white">Confirm</button>
             </div>
 
         </>
