@@ -1,12 +1,8 @@
 import { useState, useEffect } from "react";
-import Link from 'next/link'
 import { useSession } from "next-auth/react"
 import Image from 'next/image'
 import Container from "@/components/league/container";
-import TeamInfo from "@/components/league/teamInfo";
-import TeamOutcome from "@/components/league/teamOutcome";
-import TeamStanding from "@/components/league/teamStanding";
-import TeamTable from "@/components/league/teamTable";
+import League from "@/components/league/league";
 
 const LEAGUE_DATA = [
     {
@@ -121,8 +117,8 @@ const LEAGUE_DATA = [
 const Index = () => {
     const { data: session, status } = useSession()
     const [yahooLeagues, setYahooLeagues] = useState<any[]>([]);
+    const [selectedLeagueKey, setSelectedLeagueKey] = useState<string | undefined>();
     const [selectedLeague, setSelectedLeague] = useState<string | undefined>();
-    const [selectedLeagueTeams, setSelectedLeagueTeams] = useState<TeamInfo[]>([]);
 
     useEffect(() => {
         fetchYahooLeagues();
@@ -136,21 +132,11 @@ const Index = () => {
         const fantasySportsResult = await res.json();
         const receivedLeagues = TransformYahooLeaguesContent(fantasySportsResult.result.fantasy_content);
         setYahooLeagues(receivedLeagues);
-        // setYahooLeagues(LEAGUE_DATA);
     }
 
     async function handleLeagueSelect(nextLeague: any) {
-        const res = await fetch('/api/yahoofantasysports', {
-            method: "POST",
-            body: JSON.stringify({ call: `league/${nextLeague.league_key}/standings` })
-        })
-        const fantasySportsResult = await res.json();
-        const selectedLeague = TransformYahooTeamsContent(fantasySportsResult.result.fantasy_content);
-        console.log(JSON.stringify(selectedLeague, null, 2));
-        setSelectedLeagueTeams(selectedLeague);
-
         setSelectedLeague(nextLeague.name);
-        // setSelectedLeagueTeams(TEAMS_DATA);
+        setSelectedLeagueKey(nextLeague.league_key);
     }
 
     const leagues = yahooLeagues.map((leagueData: any) => {
@@ -189,24 +175,15 @@ const Index = () => {
                             {leagues}
                         </ol>
                     </Container>
-                    {selectedLeague && (
-                        <Container title={selectedLeague}>
-                            <TeamTable teams={selectedLeagueTeams} />
-                        </Container>
-                    )}
-                    {!selectedLeague && (
-                        <Container>
-                            <h1 className="text-red-400">Please Select a league</h1>
-                        </Container>
-                    )}
+                    <League
+                        leagueKey={selectedLeagueKey}
+                        leagueName={selectedLeague}
+                    />
                 </>
-
-
             )}
         </div>
     );
 }
-
 
 function TransformYahooLeaguesContent(yahooFantasyLeagueContent: any) {
     const leagues = yahooFantasyLeagueContent.users[0].user[0].games[0].game[0].leagues[0].league.map((leagueData: any) => {
@@ -219,30 +196,6 @@ function TransformYahooLeaguesContent(yahooFantasyLeagueContent: any) {
             season: leagueData.season[0]
         }
         return transformedLeague;
-    })
-    return leagues;
-}
-
-function TransformYahooTeamsContent(yahooFantasyLeagueContent: any) {
-    const leagues = yahooFantasyLeagueContent.league[0].standings[0].teams[0].team.map((teamData: any) => {
-        const team = {
-            team_key: teamData.team_key[0],
-            team_id: teamData.team_id[0],
-            name: teamData.name[0],
-            url: teamData.url[0],
-            team_logo_url: teamData.team_logos[0].team_logo[0].url[0],
-            manager: teamData.managers[0].manager[0].nickname[0],
-            standing: {
-                wins: teamData.team_standings[0].outcome_totals[0].wins[0],
-                losses: teamData.team_standings[0].outcome_totals[0].losses[0],
-                ties: teamData.team_standings[0].outcome_totals[0].ties[0],
-                pointsFor: teamData.team_standings[0].points_for[0],
-                pointsAgainst: teamData.team_standings[0].points_against[0],
-            }
-        }
-        const teamOutcome = new TeamOutcome(team.standing.wins, team.standing.losses, team.standing.ties, team.standing.pointsFor, team.standing.pointsAgainst)
-        const transformedTeam = new TeamInfo(team.team_id, team.team_key, team.name, team.url, teamOutcome, team.manager, team.team_logo_url);
-        return transformedTeam;
     })
     return leagues;
 }
